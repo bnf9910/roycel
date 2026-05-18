@@ -428,17 +428,17 @@
     height: 100%;
     object-fit: cover;
     object-position: center right;
-    filter: brightness(0.88) contrast(1.04);
+    filter: brightness(1.02) contrast(1.02);
   }
 
-  /* Gradient overlay — fades right side of photo into background */
+  /* Gradient overlay — softer, fades left side only for text legibility */
   .story-portrait::before {
     content: '';
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(90deg, rgba(10,10,9,0.96) 0%, rgba(10,10,9,0.55) 40%, transparent 75%),
-      linear-gradient(180deg, transparent 0%, transparent 60%, rgba(10,10,9,0.9) 100%);
+      linear-gradient(90deg, rgba(10,10,9,0.78) 0%, rgba(10,10,9,0.42) 30%, rgba(10,10,9,0.1) 55%, transparent 70%),
+      linear-gradient(180deg, transparent 0%, transparent 70%, rgba(10,10,9,0.7) 100%);
     z-index: 1;
   }
 
