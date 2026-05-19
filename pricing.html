@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light" style=""><head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     
     
     <title>Roycell Chungdam Consultation Book</title>
@@ -738,8 +742,8 @@
 
       .ba-grid {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 22px;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
       }
 
       .ba-card {
@@ -747,6 +751,11 @@
         border: 1px solid rgba(212, 184, 129, 0.18);
         overflow: hidden;
         position: relative;
+        display: flex;
+        flex-direction: column;
+      }
+      .ba-card-wide {
+        grid-column: span 3;
       }
       .ba-card img {
         width: 100%;
@@ -757,25 +766,40 @@
         padding: 22px 26px 24px;
         border-top: 1px solid rgba(212, 184, 129, 0.14);
         background: rgba(5, 5, 5, 0.5);
+        flex: 1;
       }
       .ba-card-label h4 {
         font-family: 'Sorts Mill Goudy', 'Noto Serif', serif;
-        font-size: 1rem;
+        font-size: 1.02rem;
         margin: 0 0 6px;
         color: #efe7da;
         letter-spacing: 0.04em;
         font-weight: 400;
       }
       .ba-card-label p {
-        font-size: 0.8rem;
+        font-size: 0.82rem;
         color: #9c8d79;
         letter-spacing: 0.04em;
         margin: 0;
+        line-height: 1.55;
+      }
+      .ba-card-detail {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin-top: 14px;
+        padding-top: 14px;
+        border-top: 1px dashed rgba(212, 184, 129, 0.16);
+      }
+      .ba-card-detail span {
+        font-size: 0.78rem;
+        color: #bfa485;
+        letter-spacing: 0.02em;
         line-height: 1.5;
       }
 
       .results-cta-card {
-        grid-column: span 2;
+        grid-column: span 3;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -828,6 +852,12 @@
         transform: translateY(-1px);
       }
 
+      @media (max-width: 960px) {
+        .ba-grid { grid-template-columns: repeat(2, 1fr); }
+        .ba-card-wide { grid-column: span 2; }
+        .results-cta-card { grid-column: span 2; }
+      }
+
       @media (max-width: 760px) {
         .results-section { padding: 0 22px; margin-top: 60px; }
         .results-header { margin-bottom: 44px; }
@@ -835,8 +865,200 @@
           grid-template-columns: 1fr;
           gap: 16px;
         }
+        .ba-card-wide { grid-column: span 1; }
         .results-cta-card { grid-column: span 1; padding: 44px 24px; }
         .results-cta-card h3 { font-size: 1.3rem; }
+        .ba-card-detail span { font-size: 0.74rem; }
+      }
+
+      /* ============================================
+         DEVICES SECTION
+         ============================================ */
+      .devices-section {
+        max-width: 980px;
+        margin: 60px auto 0;
+        padding: 0 32px;
+        display: none;
+      }
+      .devices-section.is-visible { display: block; }
+
+      .device-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+      }
+
+      .device-card {
+        background: linear-gradient(180deg, rgba(212, 184, 129, 0.04) 0%, rgba(212, 184, 129, 0.015) 100%);
+        border: 1px solid rgba(212, 184, 129, 0.22);
+        overflow: hidden;
+        position: relative;
+        display: grid;
+        grid-template-columns: 360px 1fr;
+        gap: 0;
+      }
+      .device-card-signature {
+        border-color: rgba(212, 184, 129, 0.4);
+        box-shadow: 0 18px 48px rgba(0, 0, 0, 0.35);
+      }
+      .device-card-signature::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, #e0be7a, transparent);
+      }
+
+      .device-tag {
+        position: absolute;
+        top: 24px;
+        right: 24px;
+        z-index: 2;
+        font-family: 'Sorts Mill Goudy', 'Noto Serif', serif;
+        font-size: 0.64rem;
+        letter-spacing: 0.3em;
+        color: #0a0705;
+        background: linear-gradient(180deg, #d4b881 0%, #a97738 100%);
+        padding: 5px 12px;
+        text-transform: uppercase;
+      }
+
+      .device-image-wrap {
+        background: linear-gradient(180deg, #faf6ee 0%, #e8dcc4 100%);
+        padding: 40px 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .device-image-wrap img {
+        width: 100%;
+        max-width: 280px;
+        height: auto;
+        filter: drop-shadow(0 14px 32px rgba(0, 0, 0, 0.16));
+      }
+
+      .device-content {
+        padding: 36px 36px 32px;
+      }
+      .device-category {
+        font-family: 'Sorts Mill Goudy', 'Noto Serif', serif;
+        font-size: 0.7rem;
+        letter-spacing: 0.32em;
+        color: #cfb38a;
+        text-transform: uppercase;
+        margin-bottom: 14px;
+      }
+      .device-name {
+        font-family: 'Sorts Mill Goudy', 'Noto Serif', serif;
+        font-size: 2rem;
+        color: #efe7da;
+        margin: 0 0 18px;
+        font-weight: 400;
+        line-height: 1.1;
+      }
+      .device-name em { font-style: italic; }
+      .device-name sup {
+        font-size: 0.5em;
+        letter-spacing: 0.04em;
+        vertical-align: super;
+        color: #cfb38a;
+      }
+      .device-desc {
+        color: #bfa485;
+        font-size: 0.92rem;
+        line-height: 1.75;
+        margin: 0 0 26px;
+      }
+
+      .device-spec-row {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+        padding: 18px 0;
+        margin-bottom: 22px;
+        border-top: 1px solid rgba(212, 184, 129, 0.16);
+        border-bottom: 1px solid rgba(212, 184, 129, 0.16);
+      }
+      .device-spec {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .device-spec-label {
+        font-family: 'Sorts Mill Goudy', 'Noto Serif', serif;
+        font-size: 0.6rem;
+        letter-spacing: 0.26em;
+        color: #9c8d79;
+        text-transform: uppercase;
+      }
+      .device-spec-value {
+        font-family: 'Sorts Mill Goudy', 'Noto Serif', serif;
+        font-size: 1.05rem;
+        color: #e7d09a;
+      }
+
+      .device-awards {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+      }
+      .device-award {
+        text-align: center;
+        padding: 14px 8px;
+        border: 1px solid rgba(212, 184, 129, 0.14);
+        background: rgba(5, 5, 5, 0.4);
+      }
+      .device-award strong {
+        display: block;
+        font-family: 'Sorts Mill Goudy', 'Noto Serif', serif;
+        font-size: 0.78rem;
+        letter-spacing: 0.14em;
+        color: #e7d09a;
+        margin-bottom: 4px;
+        font-weight: 400;
+      }
+      .device-award small {
+        display: block;
+        font-size: 0.62rem;
+        letter-spacing: 0.06em;
+        color: #9c8d79;
+        line-height: 1.4;
+      }
+
+      .device-coming-soon {
+        text-align: center;
+        padding: 48px 32px;
+        border: 1px dashed rgba(212, 184, 129, 0.22);
+        background: rgba(5, 5, 5, 0.3);
+      }
+      .device-coming-soon p {
+        font-family: 'Cormorant Garamond', 'Noto Serif', serif;
+        font-style: italic;
+        color: #bfa485;
+        font-size: 1rem;
+        margin: 0;
+        line-height: 1.65;
+      }
+
+      @media (max-width: 760px) {
+        .devices-section { padding: 0 22px; margin-top: 40px; }
+        .device-card {
+          grid-template-columns: 1fr;
+        }
+        .device-image-wrap { padding: 32px 24px; }
+        .device-image-wrap img { max-width: 220px; }
+        .device-content { padding: 28px 24px 26px; }
+        .device-name { font-size: 1.6rem; }
+        .device-desc { font-size: 0.88rem; }
+        .device-spec-row {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 12px 16px;
+        }
+        .device-awards {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 10px;
+        }
+        .device-coming-soon p { font-size: 0.92rem; }
       }
 
       /* ============================================
@@ -860,241 +1082,16 @@
         <span class="long">Back to Roycel</span><span class="short" style="display:none">Home</span>
       </a>
       <div class="tabs">
-        <button class="tab is-active" data-tab="treatments">Treatments</button>
-        <button class="tab" data-tab="pricing">Pricing</button>
+        <button class="tab is-active" data-tab="pricing">Pricing</button>
         <button class="tab" data-tab="results">Results</button>
+        <button class="tab" data-tab="devices">Devices</button>
       </div>
       <button class="consult-btn" onclick="openWhatsAppFromPricing()">Consult</button>
     </nav>
 
-    <!-- ===== TREATMENTS SECTION (Default tab) ===== -->
-    <section class="treatments-section is-visible" id="treatments-content">
-      <div class="tx-header">
-        <div class="tx-eyebrow">The Roycel Menu</div>
-        <h2 class="tx-title">Curated treatments. <em>Considered results.</em></h2>
-        <div class="tx-ornament"></div>
-        <p class="tx-lede">A focused selection of clinically proven, globally certified procedures — chosen and combined to suit each guest's anatomy, lifestyle, and timeline.</p>
-      </div>
 
-      <!-- CATEGORY 01: LIFTING -->
-      <div class="tx-cat">
-        <div class="tx-cat-header">
-          <span class="tx-cat-num">01</span>
-          <div>
-            <span class="tx-cat-label">Lifting &amp; Tightening</span>
-            <h3 class="tx-cat-title">The architecture of a <em>lifted face.</em></h3>
-          </div>
-        </div>
-        <p class="tx-cat-lede">Layered protocols at every depth — ultrasound, radiofrequency, micro-needling. The cornerstone of the Roycel practice.</p>
-
-        <div class="tx-grid">
-          <div class="tx-card">
-            <span class="tx-tag">Recommended Companion</span>
-            <span class="tx-card-cat">HIFU · SMAS Lifting</span>
-            <h3 class="tx-card-name"><em>Ulthera</em></h3>
-            <p class="tx-card-desc">The visualizing HIFU. Real-time DeepSEE™ imaging lets us see the SMAS layer and treat with surgical precision — recommended whenever contour or laxity is the concern.</p>
-            <div class="tx-card-meta">
-              <span>FDA-Cleared</span>
-              <span>From ₩1,890,000</span>
-            </div>
-          </div>
-
-          <div class="tx-card is-signature">
-            <span class="tx-tag">Signature</span>
-            <span class="tx-card-cat">Synchronous Ultrasound</span>
-            <h3 class="tx-card-name"><em>Sofwave</em></h3>
-            <p class="tx-card-desc">Roycel's flagship lifting protocol. 11.5MHz energy delivered through 7 transducers at 1.5mm depth — where wrinkles form. No downtime, no incisions.</p>
-            <div class="tx-card-meta">
-              <span>Award-Winning</span>
-              <span>From ₩990,000</span>
-            </div>
-          </div>
-
-          <div class="tx-card">
-            <span class="tx-tag">Recommended Companion</span>
-            <span class="tx-card-cat">Monopolar RF</span>
-            <h3 class="tx-card-name"><em>Thermage</em> FLX</h3>
-            <p class="tx-card-desc">Two decades of clinical heritage. Monopolar radiofrequency renews collagen in the deep dermis — for a comprehensive reset.</p>
-            <div class="tx-card-meta">
-              <span>20+ Years Clinical</span>
-              <span>From ₩1,690,000</span>
-            </div>
-          </div>
-
-          <div class="tx-card">
-            <span class="tx-card-cat">Diode Laser</span>
-            <h3 class="tx-card-name"><em>Titanium</em></h3>
-            <p class="tx-card-desc">Alma's clinically-proven laser delivers Boost · Tighten · Smooth in a single session, with Ice Contact Cooling for immediate return to daily life.</p>
-            <div class="tx-card-meta">
-              <span>Alma · Authentic</span>
-              <span>From ₩590,000</span>
-            </div>
-          </div>
-
-          <div class="tx-card">
-            <span class="tx-card-cat">Glow · Maintenance</span>
-            <h3 class="tx-card-name"><em>Hydrafacial</em></h3>
-            <p class="tx-card-desc">A gentle reset between treatments. Cleanse, exfoliate, infuse — pore refinement and hydration in a single visit.</p>
-            <div class="tx-card-meta">
-              <span>Travel-Friendly</span>
-              <span>From ₩490,000</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- CATEGORY 02: LASER -->
-      <div class="tx-cat">
-        <div class="tx-cat-header">
-          <span class="tx-cat-num">02</span>
-          <div>
-            <span class="tx-cat-label">Laser &amp; Skin Resurfacing</span>
-            <h3 class="tx-cat-title">Tone, texture, <em>clarity.</em></h3>
-          </div>
-        </div>
-        <p class="tx-cat-lede">From precision pigmentation control to redness, scars, and pore refinement — five dedicated platforms, each chosen for what it does best.</p>
-
-        <div class="tx-grid">
-          <div class="tx-card">
-            <span class="tx-card-cat">Toning Laser</span>
-            <h3 class="tx-card-name"><em>Revlite</em> SI</h3>
-            <p class="tx-card-desc">Cynosure's high-energy toning laser. Gently fragments deep dermal pigment without compromising surrounding tissue — for melasma, freckles, and tone irregularity.</p>
-            <div class="tx-card-meta">
-              <span>Cynosure</span>
-              <span>Pigment · Tone</span>
-            </div>
-          </div>
-
-          <div class="tx-card">
-            <span class="tx-card-cat">Hair · Pigment Laser</span>
-            <h3 class="tx-card-name"><em>Clarity</em> II</h3>
-            <p class="tx-card-desc">Lutronic's IntelliTrack auto-tracking system delivers uniform, low-pain treatment for vascular concerns, pigmentation, and hair removal.</p>
-            <div class="tx-card-meta">
-              <span>Lutronic</span>
-              <span>Anesthesia-Free</span>
-            </div>
-          </div>
-
-          <div class="tx-card">
-            <span class="tx-card-cat">Picosecond Laser</span>
-            <h3 class="tx-card-name"><em>PicoPlus</em></h3>
-            <p class="tx-card-desc">Picosecond and nanosecond pulses across four wavelengths and six handpieces — for tattoo removal, pigmentation, scars, and texture.</p>
-            <div class="tx-card-meta">
-              <span>Lutronic</span>
-              <span>From ₩390,000</span>
-            </div>
-          </div>
-
-          <div class="tx-card">
-            <span class="tx-card-cat">RF Microneedling</span>
-            <h3 class="tx-card-name"><em>Potenza</em></h3>
-            <p class="tx-card-desc">Jeisys's hybrid RF microneedling delivers radiofrequency safely through invasive and non-invasive modes — tailored to skin condition.</p>
-            <div class="tx-card-meta">
-              <span>Jeisys</span>
-              <span>From ₩490,000</span>
-            </div>
-          </div>
-
-          <div class="tx-card">
-            <span class="tx-card-cat">IPL · Multi-Wavelength</span>
-            <h3 class="tx-card-name"><em>Selec V</em></h3>
-            <p class="tx-card-desc">Four targeted wavelengths in one platform — redness, pigmentation, acne, and unwanted hair. The all-rounder for skin tone.</p>
-            <div class="tx-card-meta">
-              <span>IPL</span>
-              <span>Tone · Vascular</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- CATEGORY 03: PETIT -->
-      <div class="tx-cat">
-        <div class="tx-cat-header">
-          <span class="tx-cat-num">03</span>
-          <div>
-            <span class="tx-cat-label">Petit Procedures</span>
-            <h3 class="tx-cat-title">Volume, balance, <em>restraint.</em></h3>
-          </div>
-        </div>
-        <p class="tx-cat-lede">Injectables placed by hands trained in anatomical restraint. The art is in what you don't see.</p>
-
-        <div class="tx-grid">
-          <div class="tx-card is-signature">
-            <span class="tx-tag">Roycel Signature</span>
-            <span class="tx-card-cat">Tear-Trough Filler</span>
-            <h3 class="tx-card-name"><em>Tear-Trough</em></h3>
-            <p class="tx-card-desc">Our signature injection. The under-eye hollow restored with an anatomical, conservative hand. The result reads as <em>well-rested,</em> never <em>filled.</em></p>
-            <div class="tx-card-meta">
-              <span>Signature</span>
-              <span>From ₩490,000 / cc</span>
-            </div>
-          </div>
-
-          <div class="tx-card">
-            <span class="tx-card-cat">Premium HA Filler</span>
-            <h3 class="tx-card-name"><em>Juvéderm</em></h3>
-            <p class="tx-card-desc">Allergan's gold-standard hyaluronic acid family. Volume and contour — placed conservatively, calibrated to facial anatomy.</p>
-            <div class="tx-card-meta">
-              <span>Allergan</span>
-              <span>From ₩490,000 / cc</span>
-            </div>
-          </div>
-
-          <div class="tx-card">
-            <span class="tx-card-cat">Soft-Tissue Filler</span>
-            <h3 class="tx-card-name"><em>Belotero</em></h3>
-            <p class="tx-card-desc">Merz's monophasic HA filler. Exceptional tissue integration makes it the choice for fine lines, lip border, and the most delicate areas.</p>
-            <div class="tx-card-meta">
-              <span>Merz</span>
-              <span>From ₩490,000 / cc</span>
-            </div>
-          </div>
-
-          <div class="tx-card">
-            <span class="tx-card-cat">Collagen Stimulator</span>
-            <h3 class="tx-card-name"><em>Radiesse</em></h3>
-            <p class="tx-card-desc">Calcium hydroxylapatite filler that lifts and stimulates collagen — for jawline definition and structural restoration that builds over months.</p>
-            <div class="tx-card-meta">
-              <span>Merz</span>
-              <span>From ₩990,000</span>
-            </div>
-          </div>
-
-          <div class="tx-card">
-            <span class="tx-card-cat">Polynucleotide Booster</span>
-            <h3 class="tx-card-name"><em>Rejuran</em></h3>
-            <p class="tx-card-desc">Salmon-derived polynucleotides that repair and rebuild skin from within — the Korean signature for under-eye, texture, and overall skin quality.</p>
-            <div class="tx-card-meta">
-              <span>Pharma Research</span>
-              <span>From ₩330,000</span>
-            </div>
-          </div>
-
-          <div class="tx-card">
-            <span class="tx-card-cat">Hydrating Booster</span>
-            <h3 class="tx-card-name"><em>Re²O</em></h3>
-            <p class="tx-card-desc">Next-generation hydrating injectable that locks moisture deep in the dermis — long-lasting glow with minimal recovery.</p>
-            <div class="tx-card-meta">
-              <span>Roycel Selection</span>
-              <span>From ₩990,000</span>
-            </div>
-          </div>
-
-          <div class="tx-card">
-            <span class="tx-card-cat">Botulinum Toxin</span>
-            <h3 class="tx-card-name"><em>Botox · Xeomin</em></h3>
-            <p class="tx-card-desc">Allergan's Botox and Merz's Xeomin — pure-form neuromodulators for dynamic lines, jaw slimming, and skin botox toning.</p>
-            <div class="tx-card-meta">
-              <span>Allergan · Merz</span>
-              <span>From ₩130,000</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== PRICING CONTENT ===== -->
-    <div class="pricing-content is-hidden" id="pricing-content">
+    <!-- ===== PRICING CONTENT (default tab) ===== -->
+    <div class="pricing-content" id="pricing-content">
 
     <div class="cover">
       <div class="cover-sparkle"></div>
@@ -1468,51 +1465,186 @@
         <div class="results-eyebrow">Clinical Cases</div>
         <h2 class="results-title">Real results, <em>quietly delivered.</em></h2>
         <div class="results-ornament"></div>
-        <p class="results-lede">Selected before-and-after cases from the Roycel practice — each combining several modalities, calibrated to the individual.</p>
+        <p class="results-lede">Eleven selected before-and-after cases from the Roycel practice — each combining several modalities, calibrated to the individual.</p>
         <p class="results-disclaimer">— Photos shared with patient consent · Individual results may vary —</p>
       </div>
 
       <div class="ba-grid">
+
         <div class="ba-card">
-          <img src="assets/ba/page_2.webp" alt="Before and after — Cases 01-03" loading="lazy">
+          <img src="assets/ba/case_01.webp" alt="Case 01 — Contour & dark circle improvement" loading="lazy">
           <div class="ba-card-label">
-            <h4>Cases 01–03 · Definition &amp; Tightness</h4>
-            <p>Ulthera · Sofwave · Tear-trough &amp; nasolabial filler · 10 days to 1 month</p>
+            <h4>Case 01 · Contour &amp; Dark Circles</h4>
+            <p>Ulthera · Sofwave · Tear-trough &amp; nasolabial filler · 1 month after</p>
           </div>
         </div>
+
         <div class="ba-card">
-          <img src="assets/ba/page_3.webp" alt="Before and after — Cases 04-06" loading="lazy">
+          <img src="assets/ba/case_02.webp" alt="Case 02 — Elasticity & rested appearance" loading="lazy">
           <div class="ba-card-label">
-            <h4>Cases 04–06 · Volume Restoration</h4>
-            <p>Forehead, tear-trough &amp; midface fillers · combined with Ulthera</p>
+            <h4>Case 02 · Elasticity &amp; Rested Look</h4>
+            <p>Ulthera · Thermage · Tear-trough &amp; nasolabial filler · 20 days after</p>
           </div>
         </div>
+
         <div class="ba-card">
-          <img src="assets/ba/page_4.webp" alt="Comprehensive lifting case" loading="lazy">
+          <img src="assets/ba/case_03.webp" alt="Case 03 — Midface volume restoration" loading="lazy">
+          <div class="ba-card-label">
+            <h4>Case 03 · Midface Volume</h4>
+            <p>Tear-trough &amp; nasolabial filler · 10 days after</p>
+          </div>
+        </div>
+
+        <div class="ba-card">
+          <img src="assets/ba/case_04.webp" alt="Case 04 — Forehead filler" loading="lazy">
+          <div class="ba-card-label">
+            <h4>Case 04 · Forehead Refinement</h4>
+            <p>Forehead filler · Immediately after</p>
+          </div>
+        </div>
+
+        <div class="ba-card">
+          <img src="assets/ba/case_05.webp" alt="Case 05 — Tear-trough filler + Ulthera" loading="lazy">
+          <div class="ba-card-label">
+            <h4>Case 05 · Under-Eye &amp; Lift</h4>
+            <p>Tear-trough filler + Ulthera · Immediately after</p>
+          </div>
+        </div>
+
+        <div class="ba-card">
+          <img src="assets/ba/case_06.webp" alt="Case 06 — Combined lifting & filler" loading="lazy">
+          <div class="ba-card-label">
+            <h4>Case 06 · Combined Refresh</h4>
+            <p>Ulthera + Tear-trough &amp; nasolabial filler · Immediately after</p>
+          </div>
+        </div>
+
+        <!-- Comprehensive case spans 2 columns on desktop -->
+        <div class="ba-card ba-card-wide">
+          <img src="assets/ba/case_comprehensive.webp" alt="Comprehensive lifting protocol" loading="lazy">
           <div class="ba-card-label">
             <h4>Comprehensive Lifting Protocol</h4>
-            <p>Ulthera 400s + Thermage 600s · Filler · Skin Botox + Pigmentation Package</p>
+            <p>Ulthera 400s + Thermage 600s · Nasolabial &amp; tear-trough filler · Skin Botox &amp; Pigmentation Package</p>
+            <div class="ba-card-detail">
+              <span>· Jawline &amp; midface tightening</span>
+              <span>· Improved elasticity &amp; fine-line softening</span>
+              <span>· Volume restoration &amp; pigment improvement</span>
+            </div>
           </div>
         </div>
+
         <div class="ba-card">
-          <img src="assets/ba/page_5.webp" alt="Side profile lifting cases" loading="lazy">
+          <img src="assets/ba/case_07.webp" alt="Case 07 — Side face line refinement" loading="lazy">
           <div class="ba-card-label">
-            <h4>Cases 07–09 · Profile Refinement</h4>
-            <p>Ulthera with rhinoplasty filler · Jawline lifting &amp; contour</p>
+            <h4>Case 07 · Side Profile</h4>
+            <p>Side face line refinement</p>
           </div>
         </div>
+
         <div class="ba-card">
-          <img src="assets/ba/page_6.webp" alt="Long-term follow-up cases" loading="lazy">
+          <img src="assets/ba/case_08.webp" alt="Case 08 — Ulthera + rhinoplasty filler" loading="lazy">
           <div class="ba-card-label">
-            <h4>Cases 10–11 · Long-Term Follow-up</h4>
-            <p>Ulthera + filler · 2-week to 2-month follow-up imaging</p>
+            <h4>Case 08 · Profile &amp; Nose</h4>
+            <p>Ulthera + rhinoplasty filler · 1 month after</p>
           </div>
         </div>
+
+        <div class="ba-card">
+          <img src="assets/ba/case_09.webp" alt="Case 09 — Jawline lifting & contour" loading="lazy">
+          <div class="ba-card-label">
+            <h4>Case 09 · Jawline Refinement</h4>
+            <p>Jawline lifting &amp; contour restoration</p>
+          </div>
+        </div>
+
+        <div class="ba-card">
+          <img src="assets/ba/case_10.webp" alt="Case 10 — Ulthera + filler follow-up" loading="lazy">
+          <div class="ba-card-label">
+            <h4>Case 10 · Long-Term Follow-up</h4>
+            <p>Ulthera + tear-trough &amp; nasolabial filler · 2 months after</p>
+          </div>
+        </div>
+
+        <div class="ba-card">
+          <img src="assets/ba/case_11.webp" alt="Case 11 — Filler follow-up" loading="lazy">
+          <div class="ba-card-label">
+            <h4>Case 11 · Two-Week Result</h4>
+            <p>Tear-trough &amp; nasolabial filler · 2 weeks after</p>
+          </div>
+        </div>
+
         <div class="results-cta-card">
           <div class="eyebrow">Want to see your potential?</div>
           <h3>Book a personalized<br>consultation.</h3>
           <p>A senior physician will review your concerns and design a treatment plan tailored to your features, schedule, and travel itinerary.</p>
           <a href="#" onclick="openWhatsAppFromPricing(); return false;" class="results-cta-btn">Talk to Roycel</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== DEVICES SECTION ===== -->
+    <section class="devices-section" id="devices-content">
+      <div class="results-header">
+        <div class="results-eyebrow">Medical Devices</div>
+        <h2 class="results-title">The instruments of <em>our practice.</em></h2>
+        <div class="results-ornament"></div>
+        <p class="results-lede">Globally certified, clinically validated medical devices — the foundation of every treatment at Roycel Chungdam.</p>
+      </div>
+
+      <div class="device-grid">
+        <article class="device-card device-card-signature">
+          <span class="device-tag">Signature Device</span>
+          <div class="device-image-wrap">
+            <img src="assets/procedures/sofwave_device.png" alt="Sofwave device">
+          </div>
+          <div class="device-content">
+            <div class="device-category">Synchronous Ultrasound · Lifting</div>
+            <h3 class="device-name"><em>Sofwave</em><sup>™</sup></h3>
+            <p class="device-desc">Roycel's flagship lifting protocol. Sofwave delivers high-intensity 11.5MHz ultrasound energy through 7 transducers to the precise dermal layer where wrinkles form — 1.5mm beneath the surface — without compromising surrounding tissue. The result is a single-session treatment that lifts, smooths, and remodels with no downtime and no incisions.</p>
+
+            <div class="device-spec-row">
+              <div class="device-spec">
+                <span class="device-spec-label">Frequency</span>
+                <span class="device-spec-value">11.5 MHz</span>
+              </div>
+              <div class="device-spec">
+                <span class="device-spec-label">Depth</span>
+                <span class="device-spec-value">1.5 mm</span>
+              </div>
+              <div class="device-spec">
+                <span class="device-spec-label">Transducers</span>
+                <span class="device-spec-value">7</span>
+              </div>
+              <div class="device-spec">
+                <span class="device-spec-label">Downtime</span>
+                <span class="device-spec-value">None</span>
+              </div>
+            </div>
+
+            <div class="device-awards">
+              <div class="device-award">
+                <strong>ELLE</strong>
+                <small>Future of Beauty 2021</small>
+              </div>
+              <div class="device-award">
+                <strong>SHAPE</strong>
+                <small>Best Pro-Grade 2022</small>
+              </div>
+              <div class="device-award">
+                <strong>NEW BEAUTY</strong>
+                <small>Best Latest Ultrasound</small>
+              </div>
+              <div class="device-award">
+                <strong>COSMO</strong>
+                <small>Best Game Changer</small>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <div class="device-coming-soon">
+          <div class="results-eyebrow" style="margin-bottom: 14px;">More Devices</div>
+          <p>Additional medical device details will be added soon — Ulthera, Thermage FLX, PicoPlus, Potenza, and others.</p>
         </div>
       </div>
     </section>
@@ -1529,25 +1661,25 @@
 
       // Tab switching
       const tabs = document.querySelectorAll('.tab');
-      const treatmentsEl = document.getElementById('treatments-content');
       const pricingEl = document.getElementById('pricing-content');
       const resultsEl = document.getElementById('results-content');
+      const devicesEl = document.getElementById('devices-content');
 
       function showTab(name) {
         tabs.forEach(t => t.classList.toggle('is-active', t.dataset.tab === name));
 
         // Hide all
-        treatmentsEl.classList.remove('is-visible');
         pricingEl.classList.add('is-hidden');
         resultsEl.classList.remove('is-visible');
+        devicesEl.classList.remove('is-visible');
 
         // Show selected
-        if (name === 'treatments') {
-          treatmentsEl.classList.add('is-visible');
-        } else if (name === 'pricing') {
+        if (name === 'pricing') {
           pricingEl.classList.remove('is-hidden');
         } else if (name === 'results') {
           resultsEl.classList.add('is-visible');
+        } else if (name === 'devices') {
+          devicesEl.classList.add('is-visible');
         }
 
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1558,7 +1690,7 @@
 
       // Honor URL hash on first load
       const hash = window.location.hash.replace('#', '');
-      if (hash === 'pricing' || hash === 'results' || hash === 'treatments') {
+      if (hash === 'pricing' || hash === 'results' || hash === 'devices') {
         showTab(hash);
       }
     </script>
