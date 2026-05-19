@@ -272,80 +272,142 @@
       }
 
       /* ============================================
-         MOBILE — Pricing page content (cover/sections/price-items)
+         MOBILE — Aggressive override (max-width: 760px)
          ============================================ */
       @media (max-width: 760px) {
         body {
-          font-size: 15px;
+          font-size: 14px;
+          max-width: 100% !important;
+          padding: 100px 0 50px !important;
+          line-height: 1.6;
+          letter-spacing: 0;
         }
+        body::before {
+          inset: 4px !important;
+        }
+
+        /* ===== COVER (logo + procedure guide) ===== */
         .cover {
-          padding: 60px 24px 50px;
-          margin-bottom: 22px;
+          padding: 44px 18px 36px !important;
+          margin: 0 10px 16px !important;
+          border-radius: 8px;
         }
+        .cover h1 { margin: 18px 0 0 !important; }
         .cover h1 span {
-          font-size: 24px !important;
+          font-size: 20px !important;
+          letter-spacing: 0.06em !important;
+        }
+        .brand-top, .brand-bottom {
+          letter-spacing: 0.1em !important;
         }
         .cover p {
-          font-size: 0.78rem;
-          letter-spacing: 0.18em;
+          font-size: 0.7rem !important;
+          letter-spacing: 0.16em !important;
+          margin-top: 14px !important;
         }
+        .logo-img { width: 80px !important; height: auto !important; }
+        .cover-sparkle { display: none !important; }
+
+        /* ===== NOTICE BAR ===== */
         .notice {
-          font-size: 0.74rem;
-          letter-spacing: 0.04em;
-          padding: 12px 18px;
-          margin: 0 14px 22px;
-          text-align: center;
+          font-size: 0.7rem !important;
+          letter-spacing: 0.02em !important;
+          padding: 10px 14px !important;
+          margin: 0 10px 14px !important;
+          text-align: center !important;
+          border-radius: 6px;
         }
+
+        /* ===== PRICING SECTIONS ===== */
         .section {
-          padding: 26px 22px 22px;
-          margin: 0 14px 18px;
-          border-radius: 10px;
+          padding: 18px 14px 14px !important;
+          margin: 0 10px 12px !important;
+          border-radius: 6px !important;
         }
         .section-title {
-          font-size: 14px;
-          padding-bottom: 12px;
-          margin-bottom: 16px;
-          letter-spacing: 0.06em;
+          font-size: 0.78rem !important;
+          padding-bottom: 10px !important;
+          margin-bottom: 12px !important;
+          letter-spacing: 0.06em !important;
         }
         .price-item {
-          padding: 12px 0;
-          gap: 14px;
+          padding: 10px 0 !important;
+          gap: 10px !important;
+          align-items: center !important;
         }
         .item-name {
-          font-size: 0.86rem;
-          letter-spacing: 0.01em;
+          font-size: 0.78rem !important;
+          letter-spacing: 0 !important;
+          line-height: 1.35 !important;
+        }
+        .item-name * {
+          font-size: 0.78rem !important;
         }
         .item-price {
-          font-size: 0.84rem;
-          min-width: 100px;
-          letter-spacing: 0.04em;
+          font-size: 0.76rem !important;
+          min-width: 78px !important;
+          letter-spacing: 0.02em !important;
+          white-space: nowrap !important;
         }
+        .item-price strong { font-size: 0.76rem !important; }
+
+        /* ===== FOOTER ===== */
         .footer {
-          font-size: 0.74rem;
-          padding: 32px 18px;
+          font-size: 0.66rem !important;
+          padding: 22px 14px !important;
+          margin: 14px 10px 0 !important;
+          letter-spacing: 0.1em;
         }
       }
 
       @media (max-width: 420px) {
+        body {
+          font-size: 13px;
+          padding: 92px 0 40px !important;
+        }
+        body::before {
+          inset: 2px !important;
+        }
         .cover {
-          padding: 50px 20px 40px;
+          padding: 36px 14px 30px !important;
+          margin: 0 6px 14px !important;
         }
         .cover h1 span {
-          font-size: 20px !important;
+          font-size: 17px !important;
+        }
+        .cover p {
+          font-size: 0.62rem !important;
+          letter-spacing: 0.12em !important;
+        }
+        .logo-img { width: 64px !important; }
+        .notice {
+          font-size: 0.62rem !important;
+          padding: 9px 10px !important;
+          margin: 0 6px 12px !important;
         }
         .section {
-          padding: 22px 18px 18px;
-          margin: 0 10px 16px;
+          padding: 14px 12px 10px !important;
+          margin: 0 6px 10px !important;
         }
-        .item-name {
-          font-size: 0.82rem;
-        }
-        .item-price {
-          font-size: 0.78rem;
-          min-width: 85px;
+        .section-title {
+          font-size: 0.72rem !important;
         }
         .price-item {
-          gap: 10px;
+          padding: 9px 0 !important;
+          gap: 8px !important;
+        }
+        .item-name, .item-name * {
+          font-size: 0.72rem !important;
+          line-height: 1.3 !important;
+        }
+        .item-price, .item-price strong {
+          font-size: 0.7rem !important;
+          min-width: 66px !important;
+        }
+        .footer {
+          font-size: 0.6rem !important;
+          padding: 18px 12px !important;
+          margin: 12px 6px 0 !important;
         }
       }
 
@@ -739,33 +801,63 @@
       }
 
       @media (max-width: 760px) {
+        /* 2-row layout: top row = back + consult, bottom row = tabs */
         .tab-nav {
-          padding: 12px 14px;
-          gap: 8px;
-          flex-wrap: nowrap;
+          flex-direction: column;
+          align-items: stretch;
+          padding: 12px 16px 10px;
+          gap: 10px;
         }
-        .tab-nav .back-link { font-size: 0.6rem; letter-spacing: 0.18em; }
+        .tab-nav-top {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 10px;
+        }
+        .tab-nav .back-link {
+          font-size: 0.66rem;
+          letter-spacing: 0.2em;
+        }
         .tab-nav .back-link .long { display: none !important; }
         .tab-nav .back-link .short { display: inline !important; }
-        .tab-nav .tabs { flex: 1; justify-content: center; min-width: 0; }
-        .tab-nav .tab {
-          font-size: 0.6rem;
-          letter-spacing: 0.16em;
-          padding: 7px 9px;
-          white-space: nowrap;
-        }
         .tab-nav .consult-btn {
-          font-size: 0.58rem;
-          padding: 7px 10px;
-          letter-spacing: 0.14em;
+          font-size: 0.62rem;
+          padding: 8px 14px;
+          letter-spacing: 0.18em;
         }
-        body { padding-top: 100px !important; }
+        .tab-nav .tabs {
+          display: flex !important;
+          gap: 6px !important;
+          overflow-x: auto;
+          overflow-y: hidden;
+          width: 100%;
+          padding-bottom: 4px;
+          justify-content: flex-start;
+          scrollbar-width: none;
+        }
+        .tab-nav .tabs::-webkit-scrollbar { display: none; }
+        .tab-nav .tab {
+          font-size: 0.66rem !important;
+          letter-spacing: 0.2em !important;
+          padding: 10px 16px !important;
+          white-space: nowrap;
+          flex: 1 1 0;
+          min-width: max-content;
+          text-align: center;
+        }
+        /* Adjust body padding for taller 2-row nav */
+        body { padding-top: 116px !important; }
       }
       @media (max-width: 420px) {
-        .tab-nav { padding: 10px 10px; gap: 6px; }
-        .tab-nav .back-link { font-size: 0.54rem; }
-        .tab-nav .tab { font-size: 0.54rem; padding: 6px 7px; letter-spacing: 0.12em; }
-        .tab-nav .consult-btn { font-size: 0.54rem; padding: 6px 8px; }
+        .tab-nav { padding: 10px 12px 8px; gap: 8px; }
+        .tab-nav .back-link { font-size: 0.6rem; letter-spacing: 0.16em; }
+        .tab-nav .consult-btn { font-size: 0.58rem; padding: 7px 12px; letter-spacing: 0.16em; }
+        .tab-nav .tab {
+          font-size: 0.56rem !important;
+          padding: 8px 8px !important;
+          letter-spacing: 0.12em !important;
+        }
+        body { padding-top: 108px !important; }
       }
 
       /* ============================================
@@ -1368,17 +1460,19 @@
 
     <!-- ===== TAB NAV — Pricing / Results switcher ===== -->
     <nav class="tab-nav">
-      <a href="index.html" class="back-link">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        <span class="long">Back to Roycel</span><span class="short" style="display:none">Home</span>
-      </a>
+      <div class="tab-nav-top">
+        <a href="index.html" class="back-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          <span class="long">Back to Roycel</span><span class="short" style="display:none">Home</span>
+        </a>
+        <button class="consult-btn" onclick="openWhatsAppFromPricing()">Consult</button>
+      </div>
       <div class="tabs">
         <button class="tab is-active" data-tab="pricing">Pricing</button>
         <button class="tab" data-tab="results">Results</button>
         <button class="tab" data-tab="devices">Medical Devices</button>
         <button class="tab" data-tab="petit">Petit</button>
       </div>
-      <button class="consult-btn" onclick="openWhatsAppFromPricing()">Consult</button>
     </nav>
 
 
