@@ -495,6 +495,35 @@
     border-left: 1px solid var(--line-strong);
   }
 
+  /* Default: show desktop version, hide mobile version */
+  .story-overlay-mobile { display: none; }
+  .story-overlay-desktop { display: block; }
+
+  /* Mobile short + gold version */
+  .story-overlay-eyebrow-gold {
+    font-family: 'Sorts Mill Goudy', serif;
+    font-size: 0.74rem;
+    letter-spacing: 0.36em;
+    color: var(--gold-bright);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+
+  .story-overlay-h2-gold {
+    font-family: 'Sorts Mill Goudy', serif;
+    font-size: 1.65rem;
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--gold-bright);
+    background: linear-gradient(180deg, #f4ecdf 0%, #e0be7a 60%, #b08442 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+  }
+
+  .story-overlay-h2-gold em { font-style: italic; }
+
   /* Body text below photo */
   .story-body {
     background: var(--bg-deepest);
@@ -1554,8 +1583,8 @@
     #sofwave { display: none; }              /* Sofwave section: web-only */
     .story-body p:nth-of-type(2),             /* Hide story paragraph 2 & 3 */
     .story-body p:nth-of-type(3) { display: none; }
-    .gallery-item:not(.gallery-item-1) { display: none; }  /* Show only 1 gallery image */
-    .treatment-desc { display: none; }       /* Hide card description, keep title + meta */
+    .treatment-desc { display: none; }       /* (kept for backward compat) */
+    .contact-channels { display: none; }     /* Hide 3-channel contact cards */
 
     /* Navigation */
     .nav { padding: 14px 18px; }
@@ -1607,6 +1636,8 @@
     }
 
     /* STORY — compact mobile (only first paragraph shown) */
+    .story-overlay-desktop { display: none; }
+    .story-overlay-mobile { display: block; }
     .story { padding-top: 70px; }
     .story-portrait { aspect-ratio: 3 / 4; }
     .story-overlay { bottom: 30px; }
@@ -1632,16 +1663,48 @@
     .story-signature { margin-top: 32px; padding-top: 24px; }
     .story-signature-name { font-size: 1.05rem; }
 
-    /* SPACE / Gallery — single dramatic hero image (others hidden) */
+    /* SPACE / Gallery — horizontal swipeable carousel on mobile */
     .space-header { margin-bottom: 40px; }
     .gallery {
-      grid-template-columns: 1fr;
-      grid-template-rows: 320px;
-      gap: 0;
+      display: flex !important;
+      grid-template-columns: none;
+      grid-template-rows: none;
+      gap: 12px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 0 4px 16px;
+      margin: 0 -22px;          /* break out of section side padding */
+      padding-left: 22px;
+      padding-right: 22px;
+      scrollbar-width: none;     /* Firefox: hide scrollbar */
     }
-    .gallery-item-1 {
-      grid-column: span 1;
-      grid-row: span 1;
+    .gallery::-webkit-scrollbar { display: none; }  /* Webkit: hide scrollbar */
+    .gallery-item,
+    .gallery-item-1, .gallery-item-2, .gallery-item-3, .gallery-item-4,
+    .gallery-item-5, .gallery-item-6, .gallery-item-7, .gallery-item-8 {
+      grid-column: auto;
+      grid-row: auto;
+      flex: 0 0 78%;             /* each card ~78% viewport width — peek next */
+      max-width: 78%;
+      height: 320px;
+      scroll-snap-align: center;
+    }
+    .gallery-item:first-child { scroll-snap-align: start; }
+    .gallery-item:last-child { scroll-snap-align: end; }
+
+    /* Swipe hint below gallery */
+    .space-inner-mobile-hint {
+      display: block !important;
+      text-align: center;
+      font-family: 'Sorts Mill Goudy', serif;
+      font-size: 0.66rem;
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+      color: var(--beige-mute);
+      margin-top: 18px;
+      opacity: 0.7;
     }
 
     /* SIGNATURE (Sofwave) */
@@ -1865,8 +1928,7 @@
     <li><a href="#story">Story</a></li>
     <li><a href="#space">Space</a></li>
     <li><a href="#sofwave">Sofwave</a></li>
-    <li><a href="#treatments">Treatments</a></li>
-    <li><a href="pricing.html">Pricing &amp; Results</a></li>
+    <li><a href="pricing.html">Treatments &amp; Pricing</a></li>
   </ul>
   <button class="nav-cta" onclick="openWhatsApp()">Consult Now</button>
 </nav>
@@ -1903,10 +1965,18 @@
   <div class="story-portrait reveal">
     <img src="assets/brand/director.webp" alt="Dr. Daewon Kim, Director of Roycel Chungdam">
     <div class="story-overlay">
-      <div class="section-eyebrow">A Word From The Director</div>
-      <h2>Beyond treatment,<br><em>a return to oneself.</em></h2>
-      <div class="ornament"></div>
-      <p class="story-overlay-quote">"Roycel is the stage where I can offer everything I have learned — fully, and without compromise."</p>
+      <!-- Desktop version (rich) -->
+      <div class="story-overlay-desktop">
+        <div class="section-eyebrow">A Word From The Director</div>
+        <h2>Beyond treatment,<br><em>a return to oneself.</em></h2>
+        <div class="ornament"></div>
+        <p class="story-overlay-quote">"Roycel is the stage where I can offer everything I have learned — fully, and without compromise."</p>
+      </div>
+      <!-- Mobile version (short, gold) -->
+      <div class="story-overlay-mobile">
+        <div class="story-overlay-eyebrow-gold">The Director</div>
+        <h2 class="story-overlay-h2-gold"><em>A return to oneself.</em></h2>
+      </div>
     </div>
   </div>
 
@@ -1960,6 +2030,7 @@
         <img src="assets/interior/wall_dramatic.webp" alt="Roycel signature stone wall detail" loading="lazy">
       </div>
     </div>
+    <div class="space-inner-mobile-hint" style="display: none;">← Swipe to explore →</div>
   </div>
 </section>
 
@@ -2029,233 +2100,6 @@
   </div>
 </section>
 
-<!-- ===== TREATMENTS GRID ===== -->
-<section class="treatments" id="treatments">
-  <div class="section-inner">
-    <div class="treatments-header reveal">
-      <div class="section-eyebrow">The Roycel Menu</div>
-      <h2 class="section-title">Curated treatments. <em>Considered results.</em></h2>
-      <div class="ornament"></div>
-      <p class="section-lede" style="margin: 0 auto;">A focused selection of clinically proven, globally certified procedures — chosen and combined to suit each guest's anatomy, lifestyle, and timeline.</p>
-    </div>
-
-    <!-- ===== CATEGORY 1: LIFTING ===== -->
-    <div class="cat-block reveal">
-      <div class="cat-header">
-        <span class="cat-num">01</span>
-        <div>
-          <span class="cat-label">Lifting & Tightening</span>
-          <h3 class="cat-title">The architecture of a <em>lifted face.</em></h3>
-        </div>
-      </div>
-      <p class="cat-lede">Layered protocols that work at every depth — ultrasound, radiofrequency, micro-needling. The cornerstone of the Roycel practice.</p>
-
-      <div class="treatments-grid">
-        <div class="treatment-card sub-sig-card reveal">
-          <span class="treatment-tag">Recommended Companion</span>
-          <span class="treatment-cat">HIFU · SMAS Lifting</span>
-          <h3 class="treatment-name"><em>Ulthera</em><sup>®</sup></h3>
-          <p class="treatment-desc">The visualizing HIFU. Real-time DeepSEE™ imaging lets us see the SMAS layer and treat with surgical precision — recommended whenever contour or laxity is the concern.</p>
-          <div class="treatment-meta">
-            <span>FDA-Cleared</span>
-            <span>From ₩1,890,000</span>
-          </div>
-        </div>
-
-        <div class="treatment-card sub-sig-card reveal">
-          <span class="treatment-tag">Signature</span>
-          <span class="treatment-cat">Synchronous Ultrasound</span>
-          <h3 class="treatment-name"><em>Sofwave</em><sup>™</sup></h3>
-          <p class="treatment-desc">Roycel's flagship lifting protocol. 11.5MHz energy delivered through 7 transducers at 1.5mm depth — where wrinkles form. No downtime, no incisions.</p>
-          <div class="treatment-meta">
-            <span>Award-Winning</span>
-            <span>From ₩990,000</span>
-          </div>
-        </div>
-
-        <div class="treatment-card sub-sig-card reveal">
-          <span class="treatment-tag">Recommended Companion</span>
-          <span class="treatment-cat">Monopolar RF</span>
-          <h3 class="treatment-name"><em>Thermage</em> FLX</h3>
-          <p class="treatment-desc">Two decades of clinical heritage. Monopolar radiofrequency renews collagen in the deep dermis — recommended when skin condition calls for a comprehensive reset.</p>
-          <div class="treatment-meta">
-            <span>20+ Years Clinical</span>
-            <span>From ₩1,690,000</span>
-          </div>
-        </div>
-
-        <div class="treatment-card reveal">
-          <span class="treatment-cat">Diode Laser</span>
-          <h3 class="treatment-name"><em>Titanium</em></h3>
-          <p class="treatment-desc">Alma's clinically-proven laser delivers Boost · Tighten · Smooth in a single session, with the integrated Ice Contact Cooling system for comfort and immediate return to daily life.</p>
-          <div class="treatment-meta">
-            <span>Alma · Authentic</span>
-            <span>From ₩590,000</span>
-          </div>
-        </div>
-
-        <div class="treatment-card reveal">
-          <span class="treatment-cat">Glow · Maintenance</span>
-          <h3 class="treatment-name"><em>Hydrafacial</em><sup>®</sup></h3>
-          <p class="treatment-desc">A gentle reset between treatments. Cleanse, exfoliate, infuse — for a soft, luminous finish that travels well. Pore refinement and hydration in a single visit.</p>
-          <div class="treatment-meta">
-            <span>Travel-Friendly</span>
-            <span>From ₩490,000</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ===== CATEGORY 2: LASER ===== -->
-    <div class="cat-block reveal">
-      <div class="cat-header">
-        <span class="cat-num">02</span>
-        <div>
-          <span class="cat-label">Laser & Skin Resurfacing</span>
-          <h3 class="cat-title">Tone, texture, <em>clarity.</em></h3>
-        </div>
-      </div>
-      <p class="cat-lede">From precision pigmentation control to redness, scars, and pore refinement — five dedicated platforms, each chosen for what it does best.</p>
-
-      <div class="treatments-grid">
-        <div class="treatment-card reveal">
-          <span class="treatment-cat">Toning Laser</span>
-          <h3 class="treatment-name"><em>Revlite</em> SI</h3>
-          <p class="treatment-desc">Cynosure's high-energy toning laser. Higher energy than conventional toning, gently fragmenting deep dermal pigment without compromising surrounding tissue — for melasma, freckles, and tone irregularity.</p>
-          <div class="treatment-meta">
-            <span>Cynosure</span>
-            <span>Pigment · Tone</span>
-          </div>
-        </div>
-
-        <div class="treatment-card reveal">
-          <span class="treatment-cat">Hair · Pigment Laser</span>
-          <h3 class="treatment-name"><em>Clarity</em> II</h3>
-          <p class="treatment-desc">Lutronic's IntelliTrack auto-tracking system delivers uniform, low-pain treatment for vascular concerns, pigmentation, and hair removal — from coarse to fine.</p>
-          <div class="treatment-meta">
-            <span>Lutronic</span>
-            <span>Anesthesia-Free</span>
-          </div>
-        </div>
-
-        <div class="treatment-card reveal">
-          <span class="treatment-cat">Picosecond Laser</span>
-          <h3 class="treatment-name"><em>PicoPlus</em></h3>
-          <p class="treatment-desc">True PICO Performance. Picosecond and nanosecond pulses across four wavelengths (1064, 532, 595, 660nm) and six handpieces — for tattoo removal, pigmentation, scars, and texture.</p>
-          <div class="treatment-meta">
-            <span>Lutronic</span>
-            <span>From ₩390,000</span>
-          </div>
-        </div>
-
-        <div class="treatment-card reveal">
-          <span class="treatment-cat">RF Microneedling</span>
-          <h3 class="treatment-name"><em>Potenza</em></h3>
-          <p class="treatment-desc">Jeisys's hybrid RF microneedling system delivers radiofrequency safely to the epidermis or dermis through both invasive and non-invasive modes — tailored to skin condition.</p>
-          <div class="treatment-meta">
-            <span>Jeisys</span>
-            <span>From ₩490,000</span>
-          </div>
-        </div>
-
-        <div class="treatment-card reveal">
-          <span class="treatment-cat">IPL · Multi-Wavelength</span>
-          <h3 class="treatment-name"><em>Selec V</em></h3>
-          <p class="treatment-desc">Four targeted wavelengths in one platform — redness, pigmentation, acne, and unwanted hair. The all-rounder for skin tone, when makeup no longer covers.</p>
-          <div class="treatment-meta">
-            <span>IPL</span>
-            <span>Tone · Vascular</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ===== CATEGORY 3: PETIT ===== -->
-    <div class="cat-block reveal">
-      <div class="cat-header">
-        <span class="cat-num">03</span>
-        <div>
-          <span class="cat-label">Petit Procedures</span>
-          <h3 class="cat-title">Volume, balance, <em>restraint.</em></h3>
-        </div>
-      </div>
-      <p class="cat-lede">Injectables placed by hands trained in anatomical restraint. The art is in what you don't see.</p>
-
-      <div class="treatments-grid">
-        <div class="treatment-card sub-sig-card reveal">
-          <span class="treatment-tag">Roycel Signature</span>
-          <span class="treatment-cat">Tear-Trough Filler</span>
-          <h3 class="treatment-name"><em>Tear-Trough</em></h3>
-          <p class="treatment-desc">Our signature injection. The under-eye hollow — where age and fatigue first speak — restored with an anatomical, conservative hand. The result reads as <em>well-rested,</em> never <em>filled.</em></p>
-          <div class="treatment-meta">
-            <span>Signature</span>
-            <span>From ₩490,000 / cc</span>
-          </div>
-        </div>
-
-        <div class="treatment-card reveal">
-          <span class="treatment-cat">Premium HA Filler</span>
-          <h3 class="treatment-name"><em>Juvéderm</em></h3>
-          <p class="treatment-desc">Allergan's gold-standard hyaluronic acid family. Volume and contour for cheeks, chin, jawline, and lips — placed conservatively, calibrated to facial anatomy.</p>
-          <div class="treatment-meta">
-            <span>Allergan</span>
-            <span>From ₩490,000 / cc</span>
-          </div>
-        </div>
-
-        <div class="treatment-card reveal">
-          <span class="treatment-cat">Soft-Tissue Filler</span>
-          <h3 class="treatment-name"><em>Belotero</em></h3>
-          <p class="treatment-desc">Merz's monophasic HA filler. Exceptional integration with soft tissue makes it the choice for fine lines, lip border, and the most delicate areas of the face.</p>
-          <div class="treatment-meta">
-            <span>Merz</span>
-            <span>From ₩490,000 / cc</span>
-          </div>
-        </div>
-
-        <div class="treatment-card reveal">
-          <span class="treatment-cat">Collagen Stimulator</span>
-          <h3 class="treatment-name"><em>Radiesse</em></h3>
-          <p class="treatment-desc">Calcium hydroxylapatite filler that lifts and stimulates collagen simultaneously — for jawline definition and structural restoration that builds over months.</p>
-          <div class="treatment-meta">
-            <span>Merz</span>
-            <span>From ₩990,000</span>
-          </div>
-        </div>
-
-        <div class="treatment-card reveal">
-          <span class="treatment-cat">Polynucleotide Skin Booster</span>
-          <h3 class="treatment-name"><em>Rejuran</em></h3>
-          <p class="treatment-desc">Salmon-derived polynucleotides that repair and rebuild skin from within — the Korean signature for under-eye, texture, and overall skin quality.</p>
-          <div class="treatment-meta">
-            <span>Pharma Research</span>
-            <span>From ₩330,000</span>
-          </div>
-        </div>
-
-        <div class="treatment-card reveal">
-          <span class="treatment-cat">Hydrating Booster</span>
-          <h3 class="treatment-name"><em>Re²O</em></h3>
-          <p class="treatment-desc">Next-generation hydrating injectable that locks moisture deep in the dermis. The treatment for travelers — long-lasting glow with minimal recovery.</p>
-          <div class="treatment-meta">
-            <span>Roycel Selection</span>
-            <span>From ₩990,000</span>
-          </div>
-        </div>
-
-        <div class="treatment-card reveal">
-          <span class="treatment-cat">Botulinum Toxin</span>
-          <h3 class="treatment-name"><em>Botox · Xeomin</em></h3>
-          <p class="treatment-desc">Allergan's Botox and Merz's Xeomin — the two pure-form neuromodulators we trust. For dynamic lines, jaw slimming, and skin botox toning of pores and texture.</p>
-          <div class="treatment-meta">
-            <span>Allergan · Merz</span>
-            <span>From ₩130,000</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ===== PROMO LINK: PRICING & RESULTS PAGE ===== -->
 <section class="promo-link" id="learn-more">
@@ -2263,9 +2107,9 @@
     <div class="promo-link-grid reveal">
       <div class="promo-link-card">
         <div class="section-eyebrow">Procedure Guide</div>
-        <h3 class="promo-link-title">View pricing &amp; <em>real cases.</em></h3>
+        <h3 class="promo-link-title">Treatments, pricing &amp; <em>real cases.</em></h3>
         <div class="ornament"></div>
-        <p class="promo-link-desc">A complete procedure guide with all treatment pricing and a curated selection of before-and-after cases from the Roycel practice.</p>
+        <p class="promo-link-desc">A complete procedure guide with our treatment menu, transparent pricing, and a curated selection of before-and-after cases from the Roycel practice.</p>
         <a href="pricing.html" class="btn btn-primary promo-link-btn">
           Open the Guide
           <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: 4px;"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
@@ -2282,7 +2126,7 @@
     <div class="section-eyebrow" style="margin-bottom: 18px;">Begin</div>
     <h2>The first step is <em>a conversation.</em></h2>
     <div class="ornament ornament-center"></div>
-    <p>Reach us in whichever way feels easiest. Our English-speaking concierge responds within hours during Seoul business time — to guide you through your visit, treatment plan, and stay.</p>
+    <p>Reach us on WhatsApp. Our English-speaking concierge responds within hours during Seoul business time — to guide you through your visit, treatment plan, and stay.</p>
 
     <div class="cta-buttons">
       <button class="btn btn-primary" onclick="openWhatsApp()">
@@ -2290,18 +2134,6 @@
           <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.71.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
         </svg>
         Chat on WhatsApp
-      </button>
-      <button class="btn btn-ghost" onclick="openEmail()">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6">
-          <path d="M3 7l9 6 9-6M3 7v10a2 2 0 002 2h14a2 2 0 002-2V7M3 7a2 2 0 012-2h14a2 2 0 012 2"/>
-        </svg>
-        Email Us
-      </button>
-      <button class="btn btn-ghost" onclick="openPhone()">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6">
-          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.37 1.9.72 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0122 16.92z"/>
-        </svg>
-        Call Clinic
       </button>
     </div>
   </div>

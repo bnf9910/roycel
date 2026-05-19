@@ -353,6 +353,221 @@
       }
 
       /* ============================================
+         TREATMENTS SECTION — full menu of procedures
+         ============================================ */
+      .treatments-section {
+        max-width: 1180px;
+        margin: 60px auto 0;
+        padding: 0 32px;
+        display: none;
+      }
+      .treatments-section.is-visible {
+        display: block;
+      }
+
+      .tx-header {
+        text-align: center;
+        margin-bottom: 56px;
+      }
+      .tx-eyebrow {
+        font-family: 'Sorts Mill Goudy', 'Noto Serif', serif;
+        font-size: 0.78rem;
+        letter-spacing: 0.4em;
+        color: #cfb38a;
+        text-transform: uppercase;
+        margin-bottom: 22px;
+      }
+      .tx-title {
+        font-family: 'Sorts Mill Goudy', 'Noto Serif', serif;
+        font-size: clamp(2rem, 4.2vw, 3rem);
+        font-weight: 400;
+        line-height: 1.18;
+        margin: 0 0 24px;
+        background: linear-gradient(180deg, #f0e8dc 0%, #cfb38a 70%, #9b7340 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: #efe7da;
+      }
+      .tx-title em { font-style: italic; }
+      .tx-ornament {
+        width: 152px;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(216, 184, 124, 0.55), transparent);
+        margin: 0 auto 24px;
+      }
+      .tx-lede {
+        font-family: 'Cormorant Garamond', 'Noto Serif', serif;
+        font-style: italic;
+        font-size: 1.1rem;
+        color: #bfa485;
+        max-width: 640px;
+        margin: 0 auto;
+        line-height: 1.65;
+      }
+
+      .tx-cat {
+        margin-bottom: 72px;
+      }
+      .tx-cat:last-child { margin-bottom: 0; }
+
+      .tx-cat-header {
+        display: flex;
+        align-items: flex-start;
+        gap: 24px;
+        margin-bottom: 14px;
+        padding-bottom: 22px;
+        border-bottom: 1px solid rgba(212, 184, 129, 0.14);
+      }
+      .tx-cat-num {
+        font-family: 'Sorts Mill Goudy', 'Noto Serif', serif;
+        font-style: italic;
+        font-size: 2.8rem;
+        line-height: 1;
+        background: linear-gradient(180deg, #e0be7a 0%, #8d6530 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        flex-shrink: 0;
+        margin-top: 4px;
+      }
+      .tx-cat-label {
+        display: block;
+        font-family: 'Sorts Mill Goudy', 'Noto Serif', serif;
+        font-size: 0.74rem;
+        letter-spacing: 0.34em;
+        color: #cfb38a;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+      }
+      .tx-cat-title {
+        font-family: 'Sorts Mill Goudy', 'Noto Serif', serif;
+        font-size: clamp(1.5rem, 2.6vw, 2rem);
+        font-weight: 400;
+        line-height: 1.22;
+        color: #efe7da;
+        margin: 0;
+      }
+      .tx-cat-title em { font-style: italic; }
+      .tx-cat-lede {
+        font-family: 'Cormorant Garamond', 'Noto Serif', serif;
+        font-style: italic;
+        font-size: 1.02rem;
+        color: #bfa485;
+        margin-bottom: 36px;
+        margin-left: calc(2.8rem + 24px);
+        line-height: 1.65;
+        max-width: 720px;
+      }
+
+      .tx-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+
+      .tx-card {
+        padding: 32px 28px 26px;
+        border: 1px solid rgba(212, 184, 129, 0.14);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.01) 0%, rgba(212, 184, 129, 0.022) 100%);
+        position: relative;
+        display: flex;
+        flex-direction: column;
+      }
+      .tx-card.is-signature {
+        border-color: rgba(212, 184, 129, 0.32);
+        background: linear-gradient(180deg, rgba(212, 184, 129, 0.05) 0%, rgba(212, 184, 129, 0.02) 100%);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+      }
+      .tx-card.is-signature::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, #d4b881, transparent);
+      }
+      .tx-tag {
+        display: inline-block;
+        font-family: 'Sorts Mill Goudy', 'Noto Serif', serif;
+        font-size: 0.62rem;
+        letter-spacing: 0.3em;
+        color: #0a0705;
+        background: linear-gradient(180deg, #d4b881 0%, #a97738 100%);
+        padding: 4px 10px;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+        align-self: flex-start;
+      }
+      .tx-card-cat {
+        font-family: 'Sorts Mill Goudy', 'Noto Serif', serif;
+        font-size: 0.66rem;
+        letter-spacing: 0.3em;
+        color: #cfb38a;
+        text-transform: uppercase;
+        margin-bottom: 14px;
+      }
+      .tx-card-name {
+        font-family: 'Sorts Mill Goudy', 'Noto Serif', serif;
+        font-size: 1.4rem;
+        color: #efe7da;
+        margin: 0 0 12px;
+        line-height: 1.22;
+        letter-spacing: 0.02em;
+      }
+      .tx-card-name em { font-style: italic; color: #e7d09a; }
+      .tx-card-desc {
+        color: #9c8d79;
+        font-size: 0.88rem;
+        line-height: 1.7;
+        margin: 0 0 20px;
+      }
+      .tx-card-meta {
+        display: flex;
+        justify-content: space-between;
+        padding-top: 14px;
+        border-top: 1px solid rgba(212, 184, 129, 0.1);
+        font-size: 0.74rem;
+        color: #bfa485;
+        letter-spacing: 0.04em;
+        margin-top: auto;
+      }
+      .tx-card-meta span:first-child {
+        color: #cfb38a;
+        text-transform: uppercase;
+        font-family: 'Sorts Mill Goudy', 'Noto Serif', serif;
+        letter-spacing: 0.2em;
+        font-size: 0.64rem;
+      }
+
+      @media (max-width: 960px) {
+        .tx-grid { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 760px) {
+        .treatments-section { padding: 0 22px; margin-top: 40px; }
+        .tx-header { margin-bottom: 40px; }
+        .tx-cat { margin-bottom: 50px; }
+        .tx-cat-header {
+          flex-direction: column;
+          gap: 8px;
+          padding-bottom: 18px;
+        }
+        .tx-cat-num { font-size: 2.2rem; }
+        .tx-cat-title { font-size: 1.4rem; }
+        .tx-cat-lede {
+          margin-left: 0;
+          margin-bottom: 26px;
+          font-size: 0.98rem;
+        }
+        .tx-grid {
+          grid-template-columns: 1fr;
+          gap: 12px;
+        }
+        .tx-card { padding: 22px 22px 20px; }
+        .tx-card-name { font-size: 1.2rem; }
+        .tx-card-desc { font-size: 0.86rem; }
+      }
+
+      /* ============================================
          TAB NAV — Pricing / Results switcher
          ============================================ */
       .tab-nav {
@@ -645,14 +860,241 @@
         <span class="long">Back to Roycel</span><span class="short" style="display:none">Home</span>
       </a>
       <div class="tabs">
-        <button class="tab is-active" data-tab="pricing">Pricing</button>
+        <button class="tab is-active" data-tab="treatments">Treatments</button>
+        <button class="tab" data-tab="pricing">Pricing</button>
         <button class="tab" data-tab="results">Results</button>
       </div>
       <button class="consult-btn" onclick="openWhatsAppFromPricing()">Consult</button>
     </nav>
 
+    <!-- ===== TREATMENTS SECTION (Default tab) ===== -->
+    <section class="treatments-section is-visible" id="treatments-content">
+      <div class="tx-header">
+        <div class="tx-eyebrow">The Roycel Menu</div>
+        <h2 class="tx-title">Curated treatments. <em>Considered results.</em></h2>
+        <div class="tx-ornament"></div>
+        <p class="tx-lede">A focused selection of clinically proven, globally certified procedures — chosen and combined to suit each guest's anatomy, lifestyle, and timeline.</p>
+      </div>
+
+      <!-- CATEGORY 01: LIFTING -->
+      <div class="tx-cat">
+        <div class="tx-cat-header">
+          <span class="tx-cat-num">01</span>
+          <div>
+            <span class="tx-cat-label">Lifting &amp; Tightening</span>
+            <h3 class="tx-cat-title">The architecture of a <em>lifted face.</em></h3>
+          </div>
+        </div>
+        <p class="tx-cat-lede">Layered protocols at every depth — ultrasound, radiofrequency, micro-needling. The cornerstone of the Roycel practice.</p>
+
+        <div class="tx-grid">
+          <div class="tx-card">
+            <span class="tx-tag">Recommended Companion</span>
+            <span class="tx-card-cat">HIFU · SMAS Lifting</span>
+            <h3 class="tx-card-name"><em>Ulthera</em></h3>
+            <p class="tx-card-desc">The visualizing HIFU. Real-time DeepSEE™ imaging lets us see the SMAS layer and treat with surgical precision — recommended whenever contour or laxity is the concern.</p>
+            <div class="tx-card-meta">
+              <span>FDA-Cleared</span>
+              <span>From ₩1,890,000</span>
+            </div>
+          </div>
+
+          <div class="tx-card is-signature">
+            <span class="tx-tag">Signature</span>
+            <span class="tx-card-cat">Synchronous Ultrasound</span>
+            <h3 class="tx-card-name"><em>Sofwave</em></h3>
+            <p class="tx-card-desc">Roycel's flagship lifting protocol. 11.5MHz energy delivered through 7 transducers at 1.5mm depth — where wrinkles form. No downtime, no incisions.</p>
+            <div class="tx-card-meta">
+              <span>Award-Winning</span>
+              <span>From ₩990,000</span>
+            </div>
+          </div>
+
+          <div class="tx-card">
+            <span class="tx-tag">Recommended Companion</span>
+            <span class="tx-card-cat">Monopolar RF</span>
+            <h3 class="tx-card-name"><em>Thermage</em> FLX</h3>
+            <p class="tx-card-desc">Two decades of clinical heritage. Monopolar radiofrequency renews collagen in the deep dermis — for a comprehensive reset.</p>
+            <div class="tx-card-meta">
+              <span>20+ Years Clinical</span>
+              <span>From ₩1,690,000</span>
+            </div>
+          </div>
+
+          <div class="tx-card">
+            <span class="tx-card-cat">Diode Laser</span>
+            <h3 class="tx-card-name"><em>Titanium</em></h3>
+            <p class="tx-card-desc">Alma's clinically-proven laser delivers Boost · Tighten · Smooth in a single session, with Ice Contact Cooling for immediate return to daily life.</p>
+            <div class="tx-card-meta">
+              <span>Alma · Authentic</span>
+              <span>From ₩590,000</span>
+            </div>
+          </div>
+
+          <div class="tx-card">
+            <span class="tx-card-cat">Glow · Maintenance</span>
+            <h3 class="tx-card-name"><em>Hydrafacial</em></h3>
+            <p class="tx-card-desc">A gentle reset between treatments. Cleanse, exfoliate, infuse — pore refinement and hydration in a single visit.</p>
+            <div class="tx-card-meta">
+              <span>Travel-Friendly</span>
+              <span>From ₩490,000</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CATEGORY 02: LASER -->
+      <div class="tx-cat">
+        <div class="tx-cat-header">
+          <span class="tx-cat-num">02</span>
+          <div>
+            <span class="tx-cat-label">Laser &amp; Skin Resurfacing</span>
+            <h3 class="tx-cat-title">Tone, texture, <em>clarity.</em></h3>
+          </div>
+        </div>
+        <p class="tx-cat-lede">From precision pigmentation control to redness, scars, and pore refinement — five dedicated platforms, each chosen for what it does best.</p>
+
+        <div class="tx-grid">
+          <div class="tx-card">
+            <span class="tx-card-cat">Toning Laser</span>
+            <h3 class="tx-card-name"><em>Revlite</em> SI</h3>
+            <p class="tx-card-desc">Cynosure's high-energy toning laser. Gently fragments deep dermal pigment without compromising surrounding tissue — for melasma, freckles, and tone irregularity.</p>
+            <div class="tx-card-meta">
+              <span>Cynosure</span>
+              <span>Pigment · Tone</span>
+            </div>
+          </div>
+
+          <div class="tx-card">
+            <span class="tx-card-cat">Hair · Pigment Laser</span>
+            <h3 class="tx-card-name"><em>Clarity</em> II</h3>
+            <p class="tx-card-desc">Lutronic's IntelliTrack auto-tracking system delivers uniform, low-pain treatment for vascular concerns, pigmentation, and hair removal.</p>
+            <div class="tx-card-meta">
+              <span>Lutronic</span>
+              <span>Anesthesia-Free</span>
+            </div>
+          </div>
+
+          <div class="tx-card">
+            <span class="tx-card-cat">Picosecond Laser</span>
+            <h3 class="tx-card-name"><em>PicoPlus</em></h3>
+            <p class="tx-card-desc">Picosecond and nanosecond pulses across four wavelengths and six handpieces — for tattoo removal, pigmentation, scars, and texture.</p>
+            <div class="tx-card-meta">
+              <span>Lutronic</span>
+              <span>From ₩390,000</span>
+            </div>
+          </div>
+
+          <div class="tx-card">
+            <span class="tx-card-cat">RF Microneedling</span>
+            <h3 class="tx-card-name"><em>Potenza</em></h3>
+            <p class="tx-card-desc">Jeisys's hybrid RF microneedling delivers radiofrequency safely through invasive and non-invasive modes — tailored to skin condition.</p>
+            <div class="tx-card-meta">
+              <span>Jeisys</span>
+              <span>From ₩490,000</span>
+            </div>
+          </div>
+
+          <div class="tx-card">
+            <span class="tx-card-cat">IPL · Multi-Wavelength</span>
+            <h3 class="tx-card-name"><em>Selec V</em></h3>
+            <p class="tx-card-desc">Four targeted wavelengths in one platform — redness, pigmentation, acne, and unwanted hair. The all-rounder for skin tone.</p>
+            <div class="tx-card-meta">
+              <span>IPL</span>
+              <span>Tone · Vascular</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CATEGORY 03: PETIT -->
+      <div class="tx-cat">
+        <div class="tx-cat-header">
+          <span class="tx-cat-num">03</span>
+          <div>
+            <span class="tx-cat-label">Petit Procedures</span>
+            <h3 class="tx-cat-title">Volume, balance, <em>restraint.</em></h3>
+          </div>
+        </div>
+        <p class="tx-cat-lede">Injectables placed by hands trained in anatomical restraint. The art is in what you don't see.</p>
+
+        <div class="tx-grid">
+          <div class="tx-card is-signature">
+            <span class="tx-tag">Roycel Signature</span>
+            <span class="tx-card-cat">Tear-Trough Filler</span>
+            <h3 class="tx-card-name"><em>Tear-Trough</em></h3>
+            <p class="tx-card-desc">Our signature injection. The under-eye hollow restored with an anatomical, conservative hand. The result reads as <em>well-rested,</em> never <em>filled.</em></p>
+            <div class="tx-card-meta">
+              <span>Signature</span>
+              <span>From ₩490,000 / cc</span>
+            </div>
+          </div>
+
+          <div class="tx-card">
+            <span class="tx-card-cat">Premium HA Filler</span>
+            <h3 class="tx-card-name"><em>Juvéderm</em></h3>
+            <p class="tx-card-desc">Allergan's gold-standard hyaluronic acid family. Volume and contour — placed conservatively, calibrated to facial anatomy.</p>
+            <div class="tx-card-meta">
+              <span>Allergan</span>
+              <span>From ₩490,000 / cc</span>
+            </div>
+          </div>
+
+          <div class="tx-card">
+            <span class="tx-card-cat">Soft-Tissue Filler</span>
+            <h3 class="tx-card-name"><em>Belotero</em></h3>
+            <p class="tx-card-desc">Merz's monophasic HA filler. Exceptional tissue integration makes it the choice for fine lines, lip border, and the most delicate areas.</p>
+            <div class="tx-card-meta">
+              <span>Merz</span>
+              <span>From ₩490,000 / cc</span>
+            </div>
+          </div>
+
+          <div class="tx-card">
+            <span class="tx-card-cat">Collagen Stimulator</span>
+            <h3 class="tx-card-name"><em>Radiesse</em></h3>
+            <p class="tx-card-desc">Calcium hydroxylapatite filler that lifts and stimulates collagen — for jawline definition and structural restoration that builds over months.</p>
+            <div class="tx-card-meta">
+              <span>Merz</span>
+              <span>From ₩990,000</span>
+            </div>
+          </div>
+
+          <div class="tx-card">
+            <span class="tx-card-cat">Polynucleotide Booster</span>
+            <h3 class="tx-card-name"><em>Rejuran</em></h3>
+            <p class="tx-card-desc">Salmon-derived polynucleotides that repair and rebuild skin from within — the Korean signature for under-eye, texture, and overall skin quality.</p>
+            <div class="tx-card-meta">
+              <span>Pharma Research</span>
+              <span>From ₩330,000</span>
+            </div>
+          </div>
+
+          <div class="tx-card">
+            <span class="tx-card-cat">Hydrating Booster</span>
+            <h3 class="tx-card-name"><em>Re²O</em></h3>
+            <p class="tx-card-desc">Next-generation hydrating injectable that locks moisture deep in the dermis — long-lasting glow with minimal recovery.</p>
+            <div class="tx-card-meta">
+              <span>Roycel Selection</span>
+              <span>From ₩990,000</span>
+            </div>
+          </div>
+
+          <div class="tx-card">
+            <span class="tx-card-cat">Botulinum Toxin</span>
+            <h3 class="tx-card-name"><em>Botox · Xeomin</em></h3>
+            <p class="tx-card-desc">Allergan's Botox and Merz's Xeomin — pure-form neuromodulators for dynamic lines, jaw slimming, and skin botox toning.</p>
+            <div class="tx-card-meta">
+              <span>Allergan · Merz</span>
+              <span>From ₩130,000</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ===== PRICING CONTENT ===== -->
-    <div class="pricing-content" id="pricing-content">
+    <div class="pricing-content is-hidden" id="pricing-content">
 
     <div class="cover">
       <div class="cover-sparkle"></div>
@@ -1087,28 +1529,37 @@
 
       // Tab switching
       const tabs = document.querySelectorAll('.tab');
+      const treatmentsEl = document.getElementById('treatments-content');
       const pricingEl = document.getElementById('pricing-content');
       const resultsEl = document.getElementById('results-content');
 
       function showTab(name) {
         tabs.forEach(t => t.classList.toggle('is-active', t.dataset.tab === name));
-        if (name === 'pricing') {
+
+        // Hide all
+        treatmentsEl.classList.remove('is-visible');
+        pricingEl.classList.add('is-hidden');
+        resultsEl.classList.remove('is-visible');
+
+        // Show selected
+        if (name === 'treatments') {
+          treatmentsEl.classList.add('is-visible');
+        } else if (name === 'pricing') {
           pricingEl.classList.remove('is-hidden');
-          resultsEl.classList.remove('is-visible');
-        } else {
-          pricingEl.classList.add('is-hidden');
+        } else if (name === 'results') {
           resultsEl.classList.add('is-visible');
         }
+
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        // Update URL hash for shareable links
         history.replaceState(null, '', '#' + name);
       }
 
       tabs.forEach(t => t.addEventListener('click', () => showTab(t.dataset.tab)));
 
-      // Honor #results in URL on first load (e.g. when linked from main site)
-      if (window.location.hash === '#results') {
-        showTab('results');
+      // Honor URL hash on first load
+      const hash = window.location.hash.replace('#', '');
+      if (hash === 'pricing' || hash === 'results' || hash === 'treatments') {
+        showTab(hash);
       }
     </script>
 
