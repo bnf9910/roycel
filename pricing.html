@@ -271,6 +271,84 @@
         margin: 14mm 12mm 16mm;
       }
 
+      /* ============================================
+         MOBILE — Pricing page content (cover/sections/price-items)
+         ============================================ */
+      @media (max-width: 760px) {
+        body {
+          font-size: 15px;
+        }
+        .cover {
+          padding: 60px 24px 50px;
+          margin-bottom: 22px;
+        }
+        .cover h1 span {
+          font-size: 24px !important;
+        }
+        .cover p {
+          font-size: 0.78rem;
+          letter-spacing: 0.18em;
+        }
+        .notice {
+          font-size: 0.74rem;
+          letter-spacing: 0.04em;
+          padding: 12px 18px;
+          margin: 0 14px 22px;
+          text-align: center;
+        }
+        .section {
+          padding: 26px 22px 22px;
+          margin: 0 14px 18px;
+          border-radius: 10px;
+        }
+        .section-title {
+          font-size: 14px;
+          padding-bottom: 12px;
+          margin-bottom: 16px;
+          letter-spacing: 0.06em;
+        }
+        .price-item {
+          padding: 12px 0;
+          gap: 14px;
+        }
+        .item-name {
+          font-size: 0.86rem;
+          letter-spacing: 0.01em;
+        }
+        .item-price {
+          font-size: 0.84rem;
+          min-width: 100px;
+          letter-spacing: 0.04em;
+        }
+        .footer {
+          font-size: 0.74rem;
+          padding: 32px 18px;
+        }
+      }
+
+      @media (max-width: 420px) {
+        .cover {
+          padding: 50px 20px 40px;
+        }
+        .cover h1 span {
+          font-size: 20px !important;
+        }
+        .section {
+          padding: 22px 18px 18px;
+          margin: 0 10px 16px;
+        }
+        .item-name {
+          font-size: 0.82rem;
+        }
+        .item-price {
+          font-size: 0.78rem;
+          min-width: 85px;
+        }
+        .price-item {
+          gap: 10px;
+        }
+      }
+
       @media print {
         html,
         body {
@@ -755,8 +833,8 @@
 
       .ba-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
       }
 
       .ba-card {
@@ -768,7 +846,7 @@
         flex-direction: column;
       }
       .ba-card-wide {
-        grid-column: span 3;
+        grid-column: span 2;
       }
       .ba-card img {
         width: 100%;
@@ -812,7 +890,7 @@
       }
 
       .results-cta-card {
-        grid-column: span 3;
+        grid-column: span 2;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -866,7 +944,6 @@
       }
 
       @media (max-width: 960px) {
-        .ba-grid { grid-template-columns: repeat(2, 1fr); }
         .ba-card-wide { grid-column: span 2; }
         .results-cta-card { grid-column: span 2; }
       }
