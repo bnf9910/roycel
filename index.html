@@ -120,6 +120,12 @@
 
   .nav-menu a:hover::after { width: 100%; }
 
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
   .nav-cta {
     font-family: 'Inter', sans-serif;
     font-size: 0.74rem;
@@ -132,12 +138,33 @@
     background: transparent;
     cursor: pointer;
     transition: all 0.4s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
   }
 
   .nav-cta:hover {
     background: var(--gold);
     color: #0a0a09;
   }
+
+  /* Ghost variant for secondary nav button (e.g. Pricing) */
+  .nav-cta-ghost {
+    border-color: rgba(212, 184, 129, 0.3);
+    color: var(--gold-soft);
+    background: transparent;
+  }
+  .nav-cta-ghost:hover {
+    border-color: var(--gold);
+    background: rgba(212, 184, 129, 0.08);
+    color: var(--gold-bright);
+  }
+
+  /* Text variants — short version hidden on desktop */
+  .nav-cta .cta-short { display: none; }
+  .nav-cta .cta-full { display: inline; }
 
   /* ============================================
      HERO — full-screen autoplay video
@@ -1584,15 +1611,19 @@
     .story-body p:nth-of-type(3) { display: none; }
     .contact-channels { display: none; }     /* Hide 3-channel contact cards */
 
-    /* Navigation */
-    .nav { padding: 14px 18px; }
-    .nav-logo { height: 32px; }
-    .nav.scrolled .nav-logo { height: 30px; }
+    /* Navigation — compact 2-button layout on mobile */
+    .nav { padding: 12px 14px; }
+    .nav-logo { height: 28px; }
+    .nav.scrolled .nav-logo { height: 26px; }
+    .nav-actions { gap: 6px; }
     .nav-cta {
-      font-size: 0.68rem;
-      padding: 10px 16px;
-      letter-spacing: 0.16em;
+      font-size: 0.6rem;
+      padding: 8px 12px;
+      letter-spacing: 0.14em;
     }
+    /* Swap to short text on mobile */
+    .nav-cta .cta-full { display: none; }
+    .nav-cta .cta-short { display: inline; }
 
     /* Section spacing — leaner mobile (less scroll fatigue) */
     section {
@@ -1905,9 +1936,14 @@
   /* Extra small phones (iPhone SE etc) */
   @media (max-width: 380px) {
     section { padding: 60px 18px; }
-    .nav { padding: 12px 14px; }
-    .nav-logo { height: 28px; }
-    .nav-cta { font-size: 0.62rem; padding: 8px 12px; }
+    .nav { padding: 10px 12px; }
+    .nav-logo { height: 26px; }
+    .nav-actions { gap: 5px; }
+    .nav-cta {
+      font-size: 0.56rem;
+      padding: 7px 10px;
+      letter-spacing: 0.12em;
+    }
     .section-title { font-size: 1.65rem; }
     .story-overlay h2 { font-size: 1.5rem; }
     .signature-content h2 { font-size: 1.7rem; }
@@ -1940,7 +1976,10 @@
     <li><a href="#space">Space</a></li>
     <li><a href="pricing.html">Treatments</a></li>
   </ul>
-  <button class="nav-cta" onclick="openWhatsApp()">Consult Now</button>
+  <div class="nav-actions">
+    <a href="pricing.html" class="nav-cta nav-cta-ghost">Pricing</a>
+    <button class="nav-cta" onclick="openWhatsApp()"><span class="cta-full">Consult Now</span><span class="cta-short">Consult</span></button>
+  </div>
 </nav>
 
 <!-- ===== HERO ===== -->
