@@ -610,7 +610,11 @@
       .tab-nav .tabs {
         display: flex;
         gap: 4px;
+        overflow-x: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
       }
+      .tab-nav .tabs::-webkit-scrollbar { display: none; }
 
       .tab-nav .tab {
         font-family: 'Sorts Mill Goudy', 'Noto Serif', serif;
@@ -658,23 +662,32 @@
 
       @media (max-width: 760px) {
         .tab-nav {
-          padding: 12px 16px;
-          gap: 10px;
+          padding: 12px 14px;
+          gap: 8px;
+          flex-wrap: nowrap;
         }
-        .tab-nav .back-link { font-size: 0.62rem; letter-spacing: 0.2em; }
+        .tab-nav .back-link { font-size: 0.6rem; letter-spacing: 0.18em; }
         .tab-nav .back-link .long { display: none !important; }
         .tab-nav .back-link .short { display: inline !important; }
+        .tab-nav .tabs { flex: 1; justify-content: center; min-width: 0; }
         .tab-nav .tab {
-          font-size: 0.66rem;
-          letter-spacing: 0.22em;
-          padding: 8px 12px;
+          font-size: 0.6rem;
+          letter-spacing: 0.16em;
+          padding: 7px 9px;
+          white-space: nowrap;
         }
         .tab-nav .consult-btn {
-          font-size: 0.6rem;
-          padding: 8px 12px;
-          letter-spacing: 0.16em;
+          font-size: 0.58rem;
+          padding: 7px 10px;
+          letter-spacing: 0.14em;
         }
-        body { padding-top: 110px !important; }
+        body { padding-top: 100px !important; }
+      }
+      @media (max-width: 420px) {
+        .tab-nav { padding: 10px 10px; gap: 6px; }
+        .tab-nav .back-link { font-size: 0.54rem; }
+        .tab-nav .tab { font-size: 0.54rem; padding: 6px 7px; letter-spacing: 0.12em; }
+        .tab-nav .consult-btn { font-size: 0.54rem; padding: 6px 8px; }
       }
 
       /* ============================================
@@ -875,12 +888,213 @@
          DEVICES SECTION
          ============================================ */
       .devices-section {
-        max-width: 980px;
+        max-width: 1180px;
         margin: 60px auto 0;
         padding: 0 32px;
         display: none;
       }
       .devices-section.is-visible { display: block; }
+
+      /* ----- Category block ----- */
+      .dev-cat {
+        margin-bottom: 80px;
+      }
+      .dev-cat:last-child { margin-bottom: 40px; }
+
+      .dev-cat-header {
+        display: flex;
+        align-items: flex-start;
+        gap: 24px;
+        margin-bottom: 36px;
+        padding-bottom: 22px;
+        border-bottom: 1px solid rgba(212, 184, 129, 0.16);
+      }
+      .dev-cat-num {
+        font-family: 'Sorts Mill Goudy', 'Noto Serif', serif;
+        font-style: italic;
+        font-size: 2.8rem;
+        line-height: 1;
+        background: linear-gradient(180deg, #e0be7a 0%, #8d6530 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        flex-shrink: 0;
+        margin-top: 4px;
+      }
+      .dev-cat-label {
+        display: block;
+        font-family: 'Sorts Mill Goudy', 'Noto Serif', serif;
+        font-size: 0.74rem;
+        letter-spacing: 0.34em;
+        color: #cfb38a;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+      }
+      .dev-cat-title {
+        font-family: 'Sorts Mill Goudy', 'Noto Serif', serif;
+        font-size: clamp(1.5rem, 2.6vw, 2rem);
+        font-weight: 400;
+        line-height: 1.22;
+        color: #efe7da;
+        margin: 0;
+      }
+      .dev-cat-title em { font-style: italic; }
+
+      /* ----- Grid + Card ----- */
+      .dev-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+      .dev-grid-single {
+        grid-template-columns: 1fr;
+        max-width: 720px;
+        margin: 0 auto;
+      }
+
+      .dev-card {
+        position: relative;
+        padding: 30px 28px 28px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.01) 0%, rgba(212, 184, 129, 0.022) 100%);
+        border: 1px solid rgba(212, 184, 129, 0.16);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        transition: all 0.35s ease;
+      }
+      .dev-card:hover {
+        border-color: rgba(212, 184, 129, 0.32);
+        background: linear-gradient(180deg, rgba(212, 184, 129, 0.03) 0%, rgba(212, 184, 129, 0.04) 100%);
+      }
+      .dev-card.is-signature {
+        border-color: rgba(212, 184, 129, 0.38);
+        background: linear-gradient(180deg, rgba(212, 184, 129, 0.06) 0%, rgba(212, 184, 129, 0.02) 100%);
+        box-shadow: 0 18px 44px rgba(0, 0, 0, 0.32);
+      }
+      .dev-card.is-signature::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, #e0be7a, transparent);
+      }
+
+      .dev-signature-tag {
+        position: absolute;
+        top: -1px;
+        right: 22px;
+        font-family: 'Sorts Mill Goudy', 'Noto Serif', serif;
+        font-size: 0.6rem;
+        letter-spacing: 0.28em;
+        color: #0a0705;
+        background: linear-gradient(180deg, #d4b881 0%, #a97738 100%);
+        padding: 4px 11px;
+        text-transform: uppercase;
+      }
+
+      .dev-cat-tag {
+        font-family: 'Sorts Mill Goudy', 'Noto Serif', serif;
+        font-size: 0.62rem;
+        letter-spacing: 0.3em;
+        color: #cfb38a;
+        text-transform: uppercase;
+        margin-top: 4px;
+      }
+
+      .dev-card-name {
+        font-family: 'Sorts Mill Goudy', 'Noto Serif', serif;
+        font-size: 1.55rem;
+        color: #efe7da;
+        margin: 0;
+        font-weight: 400;
+        line-height: 1.15;
+        letter-spacing: 0.01em;
+      }
+      .dev-card-name em {
+        font-style: italic;
+        color: #e7d09a;
+      }
+      .dev-card-name sup {
+        font-size: 0.45em;
+        color: #cfb38a;
+        vertical-align: super;
+      }
+
+      .dev-card-sub {
+        font-family: 'Cormorant Garamond', 'Noto Serif', serif;
+        font-style: italic;
+        font-size: 0.92rem;
+        color: #bfa485;
+        margin-bottom: 4px;
+      }
+
+      .dev-card-desc {
+        color: #9c8d79;
+        font-size: 0.9rem;
+        line-height: 1.7;
+        margin: 4px 0 14px;
+      }
+      .dev-card-desc em {
+        font-style: italic;
+        color: #bfa485;
+      }
+
+      .dev-card-points {
+        list-style: none;
+        margin: 0;
+        padding: 16px 0 0;
+        border-top: 1px solid rgba(212, 184, 129, 0.12);
+        margin-top: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+      }
+      .dev-card-points li {
+        font-size: 0.8rem;
+        color: #bfa485;
+        line-height: 1.5;
+        padding-left: 14px;
+        position: relative;
+      }
+      .dev-card-points li::before {
+        content: '·';
+        position: absolute;
+        left: 0;
+        top: -2px;
+        color: #cfb38a;
+        font-size: 1.2em;
+        font-weight: bold;
+      }
+
+      @media (max-width: 960px) {
+        .dev-grid { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 760px) {
+        .devices-section { padding: 0 22px; margin-top: 40px; }
+        .dev-cat { margin-bottom: 50px; }
+        .dev-cat-header {
+          flex-direction: column;
+          gap: 8px;
+          padding-bottom: 18px;
+          margin-bottom: 26px;
+        }
+        .dev-cat-num { font-size: 2.2rem; }
+        .dev-cat-title { font-size: 1.4rem; }
+        .dev-cat-label { font-size: 0.7rem; letter-spacing: 0.28em; }
+        .dev-grid {
+          grid-template-columns: 1fr;
+          gap: 12px;
+        }
+        .dev-card { padding: 22px 22px 20px; }
+        .dev-card-name { font-size: 1.32rem; }
+        .dev-card-sub { font-size: 0.85rem; }
+        .dev-card-desc { font-size: 0.86rem; }
+        .dev-card-points li { font-size: 0.76rem; }
+      }
+
+      /* ============================================
+         LEGACY (preserved but unused now) — single-card device layout
+         ============================================ */
 
       .device-grid {
         display: flex;
@@ -1084,7 +1298,8 @@
       <div class="tabs">
         <button class="tab is-active" data-tab="pricing">Pricing</button>
         <button class="tab" data-tab="results">Results</button>
-        <button class="tab" data-tab="devices">Devices</button>
+        <button class="tab" data-tab="devices">Medical Devices</button>
+        <button class="tab" data-tab="petit">Petit</button>
       </div>
       <button class="consult-btn" onclick="openWhatsAppFromPricing()">Consult</button>
     </nav>
@@ -1582,69 +1797,331 @@
       </div>
     </section>
 
-    <!-- ===== DEVICES SECTION ===== -->
+    <!-- ===== MEDICAL DEVICES SECTION (Lifting + Laser) ===== -->
     <section class="devices-section" id="devices-content">
       <div class="results-header">
         <div class="results-eyebrow">Medical Devices</div>
         <h2 class="results-title">The instruments of <em>our practice.</em></h2>
         <div class="results-ornament"></div>
-        <p class="results-lede">Globally certified, clinically validated medical devices — the foundation of every treatment at Roycel Chungdam.</p>
+        <p class="results-lede">Globally certified, clinically validated medical devices — chosen and combined to deliver precise, personalized results.</p>
       </div>
 
-      <div class="device-grid">
-        <article class="device-card device-card-signature">
-          <span class="device-tag">Signature Device</span>
-          <div class="device-image-wrap">
-            <img src="assets/procedures/sofwave_device.png" alt="Sofwave device">
+      <!-- LIFTING CATEGORY -->
+      <div class="dev-cat">
+        <div class="dev-cat-header">
+          <span class="dev-cat-num">01</span>
+          <div>
+            <span class="dev-cat-label">Lifting &amp; Tightening</span>
+            <h3 class="dev-cat-title">Layered protocols for a <em>lifted face.</em></h3>
           </div>
-          <div class="device-content">
-            <div class="device-category">Synchronous Ultrasound · Lifting</div>
-            <h3 class="device-name"><em>Sofwave</em><sup>™</sup></h3>
-            <p class="device-desc">Roycel's flagship lifting protocol. Sofwave delivers high-intensity 11.5MHz ultrasound energy through 7 transducers to the precise dermal layer where wrinkles form — 1.5mm beneath the surface — without compromising surrounding tissue. The result is a single-session treatment that lifts, smooths, and remodels with no downtime and no incisions.</p>
+        </div>
 
-            <div class="device-spec-row">
-              <div class="device-spec">
-                <span class="device-spec-label">Frequency</span>
-                <span class="device-spec-value">11.5 MHz</span>
-              </div>
-              <div class="device-spec">
-                <span class="device-spec-label">Depth</span>
-                <span class="device-spec-value">1.5 mm</span>
-              </div>
-              <div class="device-spec">
-                <span class="device-spec-label">Transducers</span>
-                <span class="device-spec-value">7</span>
-              </div>
-              <div class="device-spec">
-                <span class="device-spec-label">Downtime</span>
-                <span class="device-spec-value">None</span>
-              </div>
-            </div>
+        <div class="dev-grid">
+          <article class="dev-card">
+            <div class="dev-cat-tag">Lifting · HIFU</div>
+            <h4 class="dev-card-name"><em>Ulthera</em></h4>
+            <div class="dev-card-sub">Visualizing HIFU · Merz Aesthetics</div>
+            <p class="dev-card-desc">The visualizing HIFU. Real-time DeepSEE™ imaging allows the physician to see the SMAS layer beneath the skin and deliver focused ultrasound energy with surgical precision — for contour and laxity concerns.</p>
+            <ul class="dev-card-points">
+              <li>FDA-cleared SMAS lifting</li>
+              <li>Real-time tissue imaging</li>
+              <li>Single-session, no downtime</li>
+            </ul>
+          </article>
 
-            <div class="device-awards">
-              <div class="device-award">
-                <strong>ELLE</strong>
-                <small>Future of Beauty 2021</small>
-              </div>
-              <div class="device-award">
-                <strong>SHAPE</strong>
-                <small>Best Pro-Grade 2022</small>
-              </div>
-              <div class="device-award">
-                <strong>NEW BEAUTY</strong>
-                <small>Best Latest Ultrasound</small>
-              </div>
-              <div class="device-award">
-                <strong>COSMO</strong>
-                <small>Best Game Changer</small>
-              </div>
-            </div>
+          <article class="dev-card is-signature">
+            <span class="dev-signature-tag">Signature</span>
+            <div class="dev-cat-tag">Lifting · Synchronous Ultrasound</div>
+            <h4 class="dev-card-name"><em>Sofwave</em><sup>™</sup></h4>
+            <div class="dev-card-sub">11.5MHz · 7 Transducers · Sofwave Medical</div>
+            <p class="dev-card-desc">Roycel's flagship lifting protocol. Synchronous ultrasound beam technology delivers energy precisely at the 1.5mm dermal layer where wrinkles form, without compromising surrounding tissue.</p>
+            <ul class="dev-card-points">
+              <li>11.5 MHz · 7 transducers · 1.5mm depth</li>
+              <li>Integrated cooling system protects the surface</li>
+              <li>ELLE · SHAPE · COSMO · NEW BEAUTY recognized</li>
+            </ul>
+          </article>
+
+          <article class="dev-card">
+            <div class="dev-cat-tag">Lifting · Diode Laser</div>
+            <h4 class="dev-card-name"><em>Titanium</em></h4>
+            <div class="dev-card-sub">1064nm Diode · Alma Lasers</div>
+            <p class="dev-card-desc">Alma's clinically-validated diode laser. Delivers Boost · Tighten · Smooth in a single session, with the integrated Ice Contact Cooling system for comfort and immediate return to daily life.</p>
+            <ul class="dev-card-points">
+              <li>Boost · Tighten · Smooth modes</li>
+              <li>Ice Contact Cooling for comfort</li>
+              <li>No anesthesia required</li>
+            </ul>
+          </article>
+
+          <article class="dev-card">
+            <div class="dev-cat-tag">Lifting · Monopolar RF</div>
+            <h4 class="dev-card-name"><em>Thermage</em> FLX</h4>
+            <div class="dev-card-sub">Monopolar Radiofrequency · Solta Medical</div>
+            <p class="dev-card-desc">Two decades of clinical heritage. Monopolar radiofrequency renews collagen in the deep dermis, with the AccuREP™ algorithm calibrating energy to each patient's skin in real time.</p>
+            <ul class="dev-card-points">
+              <li>20+ years of clinical evidence</li>
+              <li>AccuREP™ smart algorithm</li>
+              <li>Comprehensive single-session reset</li>
+            </ul>
+          </article>
+
+          <article class="dev-card">
+            <div class="dev-cat-tag">Maintenance · Hydration</div>
+            <h4 class="dev-card-name"><em>Hydrafacial</em><sup>®</sup></h4>
+            <div class="dev-card-sub">3-Step Vortex-Fusion · The HydraFacial Company</div>
+            <p class="dev-card-desc">A gentle reset between treatments. Patented vortex-fusion technology cleanses, exfoliates, and infuses serums into the skin — for pore refinement, hydration, and an immediate glow.</p>
+            <ul class="dev-card-points">
+              <li>Cleanse · Exfoliate · Infuse</li>
+              <li>Pore refinement &amp; hydration</li>
+              <li>Travel-friendly · no downtime</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+
+      <!-- LASER CATEGORY -->
+      <div class="dev-cat">
+        <div class="dev-cat-header">
+          <span class="dev-cat-num">02</span>
+          <div>
+            <span class="dev-cat-label">Laser &amp; Skin Resurfacing</span>
+            <h3 class="dev-cat-title">Tone, texture, <em>clarity.</em></h3>
           </div>
-        </article>
+        </div>
 
-        <div class="device-coming-soon">
-          <div class="results-eyebrow" style="margin-bottom: 14px;">More Devices</div>
-          <p>Additional medical device details will be added soon — Ulthera, Thermage FLX, PicoPlus, Potenza, and others.</p>
+        <div class="dev-grid">
+          <article class="dev-card">
+            <div class="dev-cat-tag">Laser · Toning</div>
+            <h4 class="dev-card-name"><em>Revlite</em> SI</h4>
+            <div class="dev-card-sub">Q-Switched Nd:YAG · Cynosure</div>
+            <p class="dev-card-desc">Cynosure's high-energy toning laser. Higher peak power than conventional toning systems, fragmenting deep dermal pigment without compromising surrounding tissue.</p>
+            <ul class="dev-card-points">
+              <li>Melasma · freckles · pigmentation</li>
+              <li>PhotoAcoustic Technology Pulse</li>
+              <li>Even, comfortable energy delivery</li>
+            </ul>
+          </article>
+
+          <article class="dev-card">
+            <div class="dev-cat-tag">Laser · Vascular &amp; Hair</div>
+            <h4 class="dev-card-name"><em>Clarity</em> II</h4>
+            <div class="dev-card-sub">Dual-Wavelength · Lutronic</div>
+            <p class="dev-card-desc">Lutronic's IntelliTrack auto-tracking system delivers uniform, low-pain treatment. Dual wavelengths address vascular concerns, pigmentation, and hair removal — from coarse to fine.</p>
+            <ul class="dev-card-points">
+              <li>IntelliTrack automatic tracking</li>
+              <li>Vascular · pigment · hair</li>
+              <li>Low-pain, anesthesia-free</li>
+            </ul>
+          </article>
+
+          <article class="dev-card">
+            <div class="dev-cat-tag">Laser · Picosecond</div>
+            <h4 class="dev-card-name"><em>Pico Plus</em></h4>
+            <div class="dev-card-sub">4-Wavelength Picosecond · Lutronic</div>
+            <p class="dev-card-desc">True picosecond and nanosecond pulses across four wavelengths (1064, 532, 595, 660nm) with six handpieces — for tattoo removal, pigmentation, scars, and skin texture.</p>
+            <ul class="dev-card-points">
+              <li>4 wavelengths · 6 handpieces</li>
+              <li>Picosecond &amp; nanosecond modes</li>
+              <li>Tattoo · pigment · scar · texture</li>
+            </ul>
+          </article>
+
+          <article class="dev-card">
+            <div class="dev-cat-tag">Laser · RF Microneedling</div>
+            <h4 class="dev-card-name"><em>Potenza</em></h4>
+            <div class="dev-card-sub">Hybrid RF Microneedling · Jeisys Medical</div>
+            <p class="dev-card-desc">Jeisys's hybrid RF microneedling platform. Delivers radiofrequency safely to the epidermis or dermis through both invasive and non-invasive modes — tailored to skin condition.</p>
+            <ul class="dev-card-points">
+              <li>Mono · Bipolar RF modes</li>
+              <li>Invasive &amp; non-invasive treatment</li>
+              <li>Acne scars · pores · texture</li>
+            </ul>
+          </article>
+
+          <article class="dev-card">
+            <div class="dev-cat-tag">Laser · IPL Multi-Wavelength</div>
+            <h4 class="dev-card-name"><em>Cellec</em> V</h4>
+            <div class="dev-card-sub">Multi-Wavelength IPL Platform</div>
+            <p class="dev-card-desc">Four targeted wavelengths in a single platform — redness, pigmentation, acne, and unwanted hair. The all-rounder for when makeup no longer covers and tone needs balancing.</p>
+            <ul class="dev-card-points">
+              <li>4 wavelength filters</li>
+              <li>Tone · vascular · acne · hair</li>
+              <li>Multi-concern in one session</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PETIT SECTION ===== -->
+    <section class="devices-section" id="petit-content">
+      <div class="results-header">
+        <div class="results-eyebrow">Petit Procedures</div>
+        <h2 class="results-title">Volume, balance, <em>restraint.</em></h2>
+        <div class="results-ornament"></div>
+        <p class="results-lede">Injectables placed by hands trained in anatomical restraint. The art is in what you don't see — the result reads as <em>well-rested,</em> never <em>filled.</em></p>
+      </div>
+
+      <!-- FILLERS -->
+      <div class="dev-cat">
+        <div class="dev-cat-header">
+          <span class="dev-cat-num">01</span>
+          <div>
+            <span class="dev-cat-label">Fillers · Volume &amp; Contour</span>
+            <h3 class="dev-cat-title">Sculpted, never <em>obvious.</em></h3>
+          </div>
+        </div>
+
+        <div class="dev-grid">
+          <article class="dev-card is-signature">
+            <span class="dev-signature-tag">Roycel Signature</span>
+            <div class="dev-cat-tag">Filler · Tear-Trough</div>
+            <h4 class="dev-card-name"><em>Tear-Trough</em></h4>
+            <div class="dev-card-sub">Under-Eye Restoration · Roycel Signature</div>
+            <p class="dev-card-desc">Our signature injection. The under-eye hollow — where age and fatigue first show — restored with an anatomical, conservative hand. The result reads as <em>well-rested,</em> never <em>filled.</em></p>
+            <ul class="dev-card-points">
+              <li>Anatomical, conservative placement</li>
+              <li>Calibrated to individual orbital structure</li>
+              <li>From ₩490,000 / cc</li>
+            </ul>
+          </article>
+
+          <article class="dev-card">
+            <div class="dev-cat-tag">Filler · Premium HA</div>
+            <h4 class="dev-card-name"><em>Juvéderm</em></h4>
+            <div class="dev-card-sub">Hyaluronic Acid Family · Allergan</div>
+            <p class="dev-card-desc">Allergan's gold-standard hyaluronic acid family. Volume and contour for cheeks, chin, jawline, and lips — placed conservatively, calibrated to facial anatomy.</p>
+            <ul class="dev-card-points">
+              <li>Vycross™ technology · long-lasting</li>
+              <li>Volume · contour · profile</li>
+              <li>Allergan · gold standard</li>
+            </ul>
+          </article>
+
+          <article class="dev-card">
+            <div class="dev-cat-tag">Filler · Soft-Tissue</div>
+            <h4 class="dev-card-name"><em>Belotero</em></h4>
+            <div class="dev-card-sub">Monophasic HA · Merz Aesthetics</div>
+            <p class="dev-card-desc">Merz's monophasic hyaluronic acid filler. Exceptional integration with soft tissue makes it the choice for fine lines, lip border, and the most delicate areas of the face.</p>
+            <ul class="dev-card-points">
+              <li>CPM® cohesive technology</li>
+              <li>Fine lines · lip border · delicate areas</li>
+              <li>Natural soft-tissue integration</li>
+            </ul>
+          </article>
+
+          <article class="dev-card">
+            <div class="dev-cat-tag">Filler · Collagen Stimulator</div>
+            <h4 class="dev-card-name"><em>Radiesse</em></h4>
+            <div class="dev-card-sub">Calcium Hydroxylapatite · Merz</div>
+            <p class="dev-card-desc">Calcium hydroxylapatite filler that lifts and stimulates collagen simultaneously — for jawline definition and structural restoration that builds over months.</p>
+            <ul class="dev-card-points">
+              <li>Immediate lift + long-term collagen</li>
+              <li>Jawline · midface · contour</li>
+              <li>Results that build over months</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+
+      <!-- SKIN BOOSTERS -->
+      <div class="dev-cat">
+        <div class="dev-cat-header">
+          <span class="dev-cat-num">02</span>
+          <div>
+            <span class="dev-cat-label">Skin Boosters &amp; Regeneration</span>
+            <h3 class="dev-cat-title">Quality of skin, from <em>within.</em></h3>
+          </div>
+        </div>
+
+        <div class="dev-grid">
+          <article class="dev-card">
+            <div class="dev-cat-tag">Booster · Polynucleotide</div>
+            <h4 class="dev-card-name"><em>Rejuran</em></h4>
+            <div class="dev-card-sub">Salmon DNA Polynucleotides · Pharma Research</div>
+            <p class="dev-card-desc">Salmon-derived polynucleotides that repair and rebuild skin from within — the Korean signature for under-eye, texture, and overall skin quality.</p>
+            <ul class="dev-card-points">
+              <li>Polynucleotide skin repair</li>
+              <li>Under-eye · texture · elasticity</li>
+              <li>Cumulative results over a series</li>
+            </ul>
+          </article>
+
+          <article class="dev-card">
+            <div class="dev-cat-tag">Booster · Deep Hydration</div>
+            <h4 class="dev-card-name"><em>Re²O</em></h4>
+            <div class="dev-card-sub">Next-Gen Hydrating Booster · Roycel Selection</div>
+            <p class="dev-card-desc">Next-generation hydrating injectable that locks moisture deep in the dermis. The treatment for travelers — long-lasting glow with minimal recovery.</p>
+            <ul class="dev-card-points">
+              <li>Deep dermal hydration</li>
+              <li>Long-lasting glow</li>
+              <li>Minimal recovery · travel-friendly</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+
+      <!-- BOTULINUM TOXINS -->
+      <div class="dev-cat">
+        <div class="dev-cat-header">
+          <span class="dev-cat-num">03</span>
+          <div>
+            <span class="dev-cat-label">Botulinum Toxins</span>
+            <h3 class="dev-cat-title">Expression, <em>refined.</em></h3>
+          </div>
+        </div>
+
+        <div class="dev-grid">
+          <article class="dev-card">
+            <div class="dev-cat-tag">Toxin · Onabotulinumtoxin A</div>
+            <h4 class="dev-card-name"><em>Botox</em></h4>
+            <div class="dev-card-sub">Allergan · The Original</div>
+            <p class="dev-card-desc">Allergan's Botox — the original and most clinically studied neuromodulator. For dynamic lines, jaw slimming, and skin botox toning of pores and texture.</p>
+            <ul class="dev-card-points">
+              <li>Dynamic wrinkles &amp; expression lines</li>
+              <li>Jaw slimming · masseter reduction</li>
+              <li>Skin botox · pore &amp; texture</li>
+            </ul>
+          </article>
+
+          <article class="dev-card">
+            <div class="dev-cat-tag">Toxin · Incobotulinumtoxin A</div>
+            <h4 class="dev-card-name"><em>Xeomin</em></h4>
+            <div class="dev-card-sub">Merz · Pure-Form Toxin</div>
+            <p class="dev-card-desc">Merz's Xeomin — a pure-form botulinum toxin with no complexing proteins, reducing the likelihood of antibody resistance over long-term use.</p>
+            <ul class="dev-card-points">
+              <li>Pure-form · no complexing proteins</li>
+              <li>Reduced resistance risk</li>
+              <li>Ideal for long-term protocols</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+
+      <!-- STEM CELLS -->
+      <div class="dev-cat">
+        <div class="dev-cat-header">
+          <span class="dev-cat-num">04</span>
+          <div>
+            <span class="dev-cat-label">Cellular Therapy</span>
+            <h3 class="dev-cat-title">Renewal at the <em>cellular level.</em></h3>
+          </div>
+        </div>
+
+        <div class="dev-grid dev-grid-single">
+          <article class="dev-card is-signature">
+            <span class="dev-signature-tag">Premium Anti-Aging</span>
+            <div class="dev-cat-tag">Stem Cell · Regenerative</div>
+            <h4 class="dev-card-name"><em>Roycel Stem Cell Therapy</em></h4>
+            <div class="dev-card-sub">Facial &amp; IV Stem Cell Infusion · Roycel Signature</div>
+            <p class="dev-card-desc">Roycel's flagship anti-aging protocol. Facial and IV stem cell infusions designed for cellular renewal, vitality, and a luminous quality of skin no topical treatment can replicate. Available in tiered protocols for first-time and returning guests.</p>
+            <ul class="dev-card-points">
+              <li>Facial Injection — single &amp; 3-session packages</li>
+              <li>Combined Facial + IV protocols</li>
+              <li>From ₩2,900,000 · See pricing tab for full details</li>
+            </ul>
+          </article>
         </div>
       </div>
     </section>
@@ -1664,6 +2141,7 @@
       const pricingEl = document.getElementById('pricing-content');
       const resultsEl = document.getElementById('results-content');
       const devicesEl = document.getElementById('devices-content');
+      const petitEl = document.getElementById('petit-content');
 
       function showTab(name) {
         tabs.forEach(t => t.classList.toggle('is-active', t.dataset.tab === name));
@@ -1672,6 +2150,7 @@
         pricingEl.classList.add('is-hidden');
         resultsEl.classList.remove('is-visible');
         devicesEl.classList.remove('is-visible');
+        petitEl.classList.remove('is-visible');
 
         // Show selected
         if (name === 'pricing') {
@@ -1680,6 +2159,8 @@
           resultsEl.classList.add('is-visible');
         } else if (name === 'devices') {
           devicesEl.classList.add('is-visible');
+        } else if (name === 'petit') {
+          petitEl.classList.add('is-visible');
         }
 
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1690,7 +2171,7 @@
 
       // Honor URL hash on first load
       const hash = window.location.hash.replace('#', '');
-      if (hash === 'pricing' || hash === 'results' || hash === 'devices') {
+      if (['pricing', 'results', 'devices', 'petit'].includes(hash)) {
         showTab(hash);
       }
     </script>
