@@ -1520,6 +1520,338 @@
         .tab-nav { display: none !important; }
         body { padding-top: 0 !important; }
       }
+      /* ============================================
+         CONSULTATION FORM MODAL
+         ============================================ */
+      .consult-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 2000;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+      }
+      .consult-modal.is-open { display: flex; }
+      .consult-modal-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(5, 5, 5, 0.82);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+      }
+      .consult-modal-box {
+        position: relative;
+        width: 100%;
+        max-width: 580px;
+        max-height: 90vh;
+        overflow-y: auto;
+        background: linear-gradient(180deg, #14110c 0%, #0c0a07 100%);
+        border: 1px solid rgba(212, 184, 129, 0.32);
+        box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+        padding: 48px 44px 40px;
+        -webkit-overflow-scrolling: touch;
+      }
+      .consult-modal-box::-webkit-scrollbar { width: 8px; }
+      .consult-modal-box::-webkit-scrollbar-thumb {
+        background: rgba(212, 184, 129, 0.2);
+        border-radius: 4px;
+      }
+      .consult-modal-close {
+        position: absolute;
+        top: 18px;
+        right: 18px;
+        width: 38px;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border: 1px solid rgba(212, 184, 129, 0.14);
+        color: #9c8d79;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      .consult-modal-close:hover {
+        border-color: #c7a060;
+        color: #e0be7a;
+      }
+      .consult-modal-header {
+        text-align: center;
+        margin-bottom: 32px;
+      }
+      .consult-modal-eyebrow {
+        font-family: 'Sorts Mill Goudy', 'Noto Serif', serif;
+        font-size: 0.74rem;
+        letter-spacing: 0.34em;
+        color: #c7a060;
+        text-transform: uppercase;
+        margin-bottom: 14px;
+      }
+      .consult-modal-title {
+        font-family: 'Sorts Mill Goudy', 'Noto Serif', serif;
+        font-size: 1.9rem;
+        font-weight: 400;
+        line-height: 1.2;
+        color: #ece3d7;
+        margin: 0 0 14px;
+      }
+      .consult-modal-sub {
+        font-family: 'Cormorant Garamond', 'Noto Serif', serif;
+        font-style: italic;
+        font-size: 1.02rem;
+        color: #bfa485;
+        line-height: 1.6;
+        margin: 0 auto;
+        max-width: 420px;
+      }
+      .consult-form {
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+      }
+      .cf-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      .cf-field {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .cf-field label {
+        font-family: 'Sorts Mill Goudy', 'Noto Serif', serif;
+        font-size: 0.78rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #cfb38a;
+      }
+      .cf-sublabel {
+        font-size: 0.68rem !important;
+        letter-spacing: 0.1em !important;
+        color: #9c8d79 !important;
+      }
+      .cf-hint {
+        color: #9c8d79;
+        text-transform: none;
+        letter-spacing: 0.02em;
+        font-style: italic;
+        font-size: 0.92em;
+      }
+      .cf-field input[type="text"],
+      .cf-field input[type="tel"],
+      .cf-field input[type="date"],
+      .cf-field input[type="datetime-local"],
+      .cf-field select {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.92rem;
+        color: #ece3d7;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(212, 184, 129, 0.32);
+        padding: 12px 14px;
+        transition: border-color 0.3s ease, background 0.3s ease;
+        width: 100%;
+      }
+      .cf-field input::placeholder { color: rgba(236, 227, 215, 0.32); }
+      .cf-field input:focus,
+      .cf-field select:focus {
+        outline: none;
+        border-color: #c7a060;
+        background: rgba(212, 184, 129, 0.04);
+      }
+      .cf-field select {
+        cursor: pointer;
+        appearance: none;
+        -webkit-appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23c7a060' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 14px center;
+        padding-right: 36px;
+      }
+      .cf-field input[type="date"]::-webkit-calendar-picker-indicator,
+      .cf-field input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+        filter: invert(0.7) sepia(1) saturate(2) hue-rotate(5deg);
+        cursor: pointer;
+      }
+      .cf-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .cf-chip {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.82rem;
+        color: #bfa485;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(212, 184, 129, 0.32);
+        padding: 9px 16px;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        border-radius: 2px;
+      }
+      .cf-chip:hover {
+        border-color: #cfb38a;
+        color: #ece3d7;
+      }
+      .cf-chip.is-selected {
+        background: linear-gradient(180deg, #d4b881 0%, #a97738 100%);
+        border-color: #e0be7a;
+        color: #0a0705;
+        font-weight: 500;
+      }
+      .cf-checkbox-line {
+        display: flex !important;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        font-family: 'Inter', sans-serif !important;
+        font-size: 0.88rem !important;
+        letter-spacing: 0.01em !important;
+        text-transform: none !important;
+        color: #bfa485 !important;
+        padding: 4px 0;
+      }
+      .cf-checkbox-line input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        accent-color: #c7a060;
+        cursor: pointer;
+        flex-shrink: 0;
+      }
+      .cf-visit-dates {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        margin-top: 6px;
+      }
+      .cf-visit-dates.is-hidden { display: none; }
+      .cf-times {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .cf-time-slot {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .cf-time-num {
+        width: 28px;
+        height: 28px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Sorts Mill Goudy', 'Noto Serif', serif;
+        font-style: italic;
+        font-size: 0.92rem;
+        color: #e0be7a;
+        border: 1px solid rgba(212, 184, 129, 0.32);
+        border-radius: 50%;
+      }
+      .cf-time-slot input { flex: 1; }
+      .cf-note-small {
+        font-size: 0.76rem;
+        color: #9c8d79;
+        font-style: italic;
+        margin: 4px 0 0;
+        line-height: 1.5;
+      }
+      .cf-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 8px;
+      }
+      .cf-submit {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.82rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #0a0705;
+        background: linear-gradient(180deg, #d4b881 0%, #a97738 100%);
+        border: 1px solid #e0be7a;
+        padding: 16px 24px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+      .cf-submit:hover {
+        background: linear-gradient(180deg, #e7d09a 0%, #c08740 100%);
+        transform: translateY(-1px);
+      }
+      .cf-skip {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.78rem;
+        letter-spacing: 0.1em;
+        color: #9c8d79;
+        background: transparent;
+        border: 1px solid rgba(212, 184, 129, 0.14);
+        padding: 13px 24px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      .cf-skip:hover {
+        border-color: #cfb38a;
+        color: #bfa485;
+      }
+
+      /* Floating Consult button */
+      .consult-fab {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        z-index: 90;
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.78rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: #0a0705;
+        background: linear-gradient(180deg, #d4b881 0%, #a97738 100%);
+        border: 1px solid #e0be7a;
+        padding: 14px 22px;
+        cursor: pointer;
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+        transition: all 0.3s ease;
+      }
+      .consult-fab:hover {
+        background: linear-gradient(180deg, #e7d09a 0%, #c08740 100%);
+        transform: translateY(-2px);
+      }
+      .consult-fab svg { width: 20px; height: 20px; fill: currentColor; }
+
+      @media (max-width: 760px) {
+        .consult-modal { padding: 0; }
+        .consult-modal-box {
+          max-width: 100%;
+          max-height: 100vh;
+          height: 100%;
+          padding: 40px 22px 32px;
+          border: none;
+        }
+        .consult-modal-title { font-size: 1.55rem; }
+        .consult-modal-sub { font-size: 0.96rem; }
+        .consult-modal-header { margin-bottom: 26px; }
+        .consult-form { gap: 20px; }
+        .cf-row { grid-template-columns: 1fr; gap: 18px; }
+        .cf-field label { font-size: 0.74rem; }
+        .cf-chip { font-size: 0.82rem; padding: 10px 15px; }
+        .consult-fab {
+          bottom: 18px;
+          right: 18px;
+          padding: 12px 18px;
+          font-size: 0.72rem;
+        }
+        .consult-fab .fab-label { display: none; }
+        .consult-fab svg { width: 22px; height: 22px; }
+      }
     </style>
   </head>
   <body style="">
@@ -1531,7 +1863,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
           <span class="long">Back to Roycel</span><span class="short" style="display:none">Home</span>
         </a>
-        <button class="consult-btn" onclick="openWhatsAppFromPricing()">Consult</button>
+        <button class="consult-btn" onclick="openConsultForm()">Consult</button>
       </div>
       <div class="tabs">
         <button class="tab is-active" data-tab="pricing">Pricing</button>
@@ -2029,7 +2361,7 @@
           <div class="eyebrow">Want to see your potential?</div>
           <h3>Book a personalized<br>consultation.</h3>
           <p>A senior physician will review your concerns and design a treatment plan tailored to your features, schedule, and travel itinerary.</p>
-          <a href="#" onclick="openWhatsAppFromPricing(); return false;" class="results-cta-btn">Talk to Roycel</a>
+          <a href="#" onclick="openConsultForm(); return false;" class="results-cta-btn">Talk to Roycel</a>
         </div>
       </div>
     </section>
@@ -2410,6 +2742,240 @@
       const hash = window.location.hash.replace('#', '');
       if (['pricing', 'results', 'devices', 'petit'].includes(hash)) {
         showTab(hash);
+      }
+    </script>
+
+    <!-- ===== CONSULTATION FORM MODAL ===== -->
+    <div class="consult-modal" id="consultModal" aria-hidden="true">
+      <div class="consult-modal-overlay" onclick="closeConsultForm()"></div>
+      <div class="consult-modal-box" role="dialog" aria-modal="true" aria-label="Consultation request form">
+        <button class="consult-modal-close" onclick="closeConsultForm()" aria-label="Close">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+        <div class="consult-modal-header">
+          <div class="consult-modal-eyebrow">Consultation Request</div>
+          <h2 class="consult-modal-title">Tell us a little<br>about your visit</h2>
+          <p class="consult-modal-sub">A short form helps our concierge prepare before your WhatsApp chat. It takes about a minute — or skip it entirely.</p>
+        </div>
+        <form class="consult-form" id="consultForm" onsubmit="return false;">
+          <div class="cf-row">
+            <div class="cf-field">
+              <label for="cf-name">Name</label>
+              <input type="text" id="cf-name" placeholder="Your full name" autocomplete="name">
+            </div>
+            <div class="cf-field">
+              <label for="cf-phone">WhatsApp Number</label>
+              <input type="tel" id="cf-phone" placeholder="+1 234 567 8900" autocomplete="tel">
+            </div>
+          </div>
+          <div class="cf-row">
+            <div class="cf-field">
+              <label for="cf-country">Country</label>
+              <input type="text" id="cf-country" placeholder="Country of residence" autocomplete="country-name">
+            </div>
+            <div class="cf-field">
+              <label for="cf-age">Age</label>
+              <select id="cf-age">
+                <option value="">Select</option>
+                <option value="Under 20">Under 20</option>
+                <option value="20s">20s</option>
+                <option value="30s">30s</option>
+                <option value="40s">40s</option>
+                <option value="50s">50s</option>
+                <option value="60s">60s</option>
+                <option value="70+">70+</option>
+              </select>
+            </div>
+          </div>
+          <div class="cf-field">
+            <label>Treatments of Interest <span class="cf-hint">— select any</span></label>
+            <div class="cf-chips" id="cf-treatments">
+              <button type="button" class="cf-chip" data-value="Sofwave">Sofwave</button>
+              <button type="button" class="cf-chip" data-value="Ulthera">Ulthera</button>
+              <button type="button" class="cf-chip" data-value="Thermage">Thermage</button>
+              <button type="button" class="cf-chip" data-value="Titanium">Titanium</button>
+              <button type="button" class="cf-chip" data-value="Laser / Toning">Laser / Toning</button>
+              <button type="button" class="cf-chip" data-value="Tear-Trough Filler">Tear-Trough Filler</button>
+              <button type="button" class="cf-chip" data-value="Filler">Filler</button>
+              <button type="button" class="cf-chip" data-value="Botox">Botox</button>
+              <button type="button" class="cf-chip" data-value="Skin Booster">Skin Booster</button>
+              <button type="button" class="cf-chip" data-value="Stem Cell Therapy">Stem Cell Therapy</button>
+              <button type="button" class="cf-chip" data-value="Not sure yet">Not sure yet</button>
+            </div>
+          </div>
+          <div class="cf-field">
+            <label>Have you had aesthetic procedures before?</label>
+            <div class="cf-chips cf-chips-single" id="cf-history">
+              <button type="button" class="cf-chip" data-value="Yes">Yes</button>
+              <button type="button" class="cf-chip" data-value="No">No</button>
+              <button type="button" class="cf-chip" data-value="Prefer not to say">Prefer not to say</button>
+            </div>
+          </div>
+          <div class="cf-field">
+            <label>Travel Dates to Korea</label>
+            <label class="cf-checkbox-line">
+              <input type="checkbox" id="cf-dates-undecided" onchange="toggleVisitDates()">
+              <span>My travel dates are not decided yet</span>
+            </label>
+            <div class="cf-visit-dates" id="cf-visit-dates">
+              <div class="cf-row">
+                <div class="cf-field">
+                  <label for="cf-arrival" class="cf-sublabel">Arrival</label>
+                  <input type="date" id="cf-arrival">
+                </div>
+                <div class="cf-field">
+                  <label for="cf-departure" class="cf-sublabel">Departure</label>
+                  <input type="date" id="cf-departure">
+                </div>
+              </div>
+              <div class="cf-field">
+                <label for="cf-flight" class="cf-sublabel">Flight number <span class="cf-hint">— optional</span></label>
+                <input type="text" id="cf-flight" placeholder="e.g. KE085">
+              </div>
+            </div>
+          </div>
+          <div class="cf-field">
+            <label>Preferred Consultation Times <span class="cf-hint">— up to 3</span></label>
+            <div class="cf-times">
+              <div class="cf-time-slot">
+                <span class="cf-time-num">1</span>
+                <input type="datetime-local" id="cf-time-1">
+              </div>
+              <div class="cf-time-slot">
+                <span class="cf-time-num">2</span>
+                <input type="datetime-local" id="cf-time-2">
+              </div>
+              <div class="cf-time-slot">
+                <span class="cf-time-num">3</span>
+                <input type="datetime-local" id="cf-time-3">
+              </div>
+            </div>
+            <p class="cf-note-small">Times are in Korea Standard Time (KST). Our concierge will confirm the final slot.</p>
+          </div>
+          <div class="cf-field">
+            <label>Concierge Support <span class="cf-hint">— select if needed</span></label>
+            <label class="cf-checkbox-line">
+              <input type="checkbox" id="cf-airport">
+              <span>Airport pickup assistance</span>
+            </label>
+            <label class="cf-checkbox-line">
+              <input type="checkbox" id="cf-translation">
+              <span>Translation support during consultation</span>
+            </label>
+          </div>
+          <div class="cf-actions">
+            <button type="button" class="cf-submit" onclick="submitConsultForm()">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.71.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+              </svg>
+              Send via WhatsApp
+            </button>
+            <button type="button" class="cf-skip" onclick="skipConsultForm()">
+              Skip form &amp; chat directly
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ===== FLOATING CONSULT BUTTON ===== -->
+    <button class="consult-fab" onclick="openConsultForm()">
+      <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.71.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+      <span class="fab-label">Consult</span>
+    </button>
+
+    <!-- ===== CONSULTATION FORM SCRIPT ===== -->
+    <script>
+      function openConsultForm() {
+        const modal = document.getElementById('consultModal');
+        if (modal) {
+          modal.classList.add('is-open');
+          modal.setAttribute('aria-hidden', 'false');
+          document.body.style.overflow = 'hidden';
+        }
+      }
+      function closeConsultForm() {
+        const modal = document.getElementById('consultModal');
+        if (modal) {
+          modal.classList.remove('is-open');
+          modal.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = '';
+        }
+      }
+      function skipConsultForm() {
+        closeConsultForm();
+        openWhatsAppFromPricing();
+      }
+      function toggleVisitDates() {
+        const undecided = document.getElementById('cf-dates-undecided');
+        const dateBlock = document.getElementById('cf-visit-dates');
+        if (undecided && dateBlock) {
+          dateBlock.classList.toggle('is-hidden', undecided.checked);
+        }
+      }
+      document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('#cf-treatments .cf-chip').forEach(chip => {
+          chip.addEventListener('click', () => chip.classList.toggle('is-selected'));
+        });
+        document.querySelectorAll('#cf-history .cf-chip').forEach(chip => {
+          chip.addEventListener('click', () => {
+            document.querySelectorAll('#cf-history .cf-chip').forEach(c => c.classList.remove('is-selected'));
+            chip.classList.add('is-selected');
+          });
+        });
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeConsultForm();
+      });
+      function submitConsultForm() {
+        const val = id => (document.getElementById(id)?.value || '').trim();
+        const checked = id => document.getElementById(id)?.checked;
+        const name = val('cf-name');
+        const phone = val('cf-phone');
+        const country = val('cf-country');
+        const age = val('cf-age');
+        const treatments = Array.from(document.querySelectorAll('#cf-treatments .cf-chip.is-selected')).map(c => c.dataset.value);
+        const history = document.querySelector('#cf-history .cf-chip.is-selected')?.dataset.value || '';
+        const datesUndecided = checked('cf-dates-undecided');
+        const arrival = val('cf-arrival');
+        const departure = val('cf-departure');
+        const flight = val('cf-flight');
+        const t1 = val('cf-time-1'), t2 = val('cf-time-2'), t3 = val('cf-time-3');
+        const airport = checked('cf-airport');
+        const translation = checked('cf-translation');
+        const fmtDT = s => { if (!s) return ''; const d = new Date(s); if (isNaN(d)) return s; return d.toLocaleString('en-GB', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }); };
+        const fmtD = s => { if (!s) return ''; const d = new Date(s); if (isNaN(d)) return s; return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }); };
+        let msg = "Hello Roycel Chungdam, I'd like to request a consultation.\n\n";
+        msg += "— CONSULTATION REQUEST —\n";
+        if (name) msg += `Name: ${name}\n`;
+        if (phone) msg += `WhatsApp: ${phone}\n`;
+        if (country) msg += `Country: ${country}\n`;
+        if (age) msg += `Age: ${age}\n`;
+        if (treatments.length) msg += `Treatments of interest: ${treatments.join(', ')}\n`;
+        if (history) msg += `Prior procedures: ${history}\n`;
+        msg += "\n— VISIT TO KOREA —\n";
+        if (datesUndecided) {
+          msg += "Travel dates: Not decided yet\n";
+        } else {
+          if (arrival) msg += `Arrival: ${fmtD(arrival)}\n`;
+          if (departure) msg += `Departure: ${fmtD(departure)}\n`;
+          if (flight) msg += `Flight: ${flight}\n`;
+          if (!arrival && !departure && !flight) msg += "Travel dates: (not specified)\n";
+        }
+        const times = [t1, t2, t3].filter(Boolean);
+        if (times.length) {
+          msg += "\n— PREFERRED CONSULTATION TIMES (KST) —\n";
+          times.forEach((t, i) => { msg += `${i + 1}. ${fmtDT(t)}\n`; });
+        }
+        if (airport || translation) {
+          msg += "\n— CONCIERGE SUPPORT —\n";
+          if (airport) msg += "• Airport pickup assistance\n";
+          if (translation) msg += "• Translation during consultation\n";
+        }
+        msg += "\nThank you. I look forward to hearing from you.";
+        closeConsultForm();
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+        window.open(url, '_blank', 'noopener');
       }
     </script>
 
