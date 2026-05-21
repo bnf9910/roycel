@@ -1749,7 +1749,7 @@
   .cf-time-slot {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
   }
   .cf-time-num {
     width: 28px;
@@ -1765,8 +1765,17 @@
     border: 1px solid var(--line-strong);
     border-radius: 50%;
   }
-  .cf-time-slot input {
+  .cf-time-slot .cf-date-input {
+    flex: 1.4;
+    min-width: 0;
+  }
+  .cf-time-slot .cf-time-select {
     flex: 1;
+    min-width: 0;
+  }
+  .cf-time-select.cf-time-closed {
+    border-color: rgba(180, 90, 90, 0.4);
+    color: #c98b8b;
   }
   .cf-note-small {
     font-size: 0.76rem;
@@ -2577,18 +2586,21 @@
         <div class="cf-times">
           <div class="cf-time-slot">
             <span class="cf-time-num">1</span>
-            <input type="datetime-local" id="cf-time-1">
+            <input type="date" id="cf-date-1" class="cf-date-input" onchange="updateTimeOptions(1)">
+            <select id="cf-time-1" class="cf-time-select"><option value="">Time</option></select>
           </div>
           <div class="cf-time-slot">
             <span class="cf-time-num">2</span>
-            <input type="datetime-local" id="cf-time-2">
+            <input type="date" id="cf-date-2" class="cf-date-input" onchange="updateTimeOptions(2)">
+            <select id="cf-time-2" class="cf-time-select"><option value="">Time</option></select>
           </div>
           <div class="cf-time-slot">
             <span class="cf-time-num">3</span>
-            <input type="datetime-local" id="cf-time-3">
+            <input type="date" id="cf-date-3" class="cf-date-input" onchange="updateTimeOptions(3)">
+            <select id="cf-time-3" class="cf-time-select"><option value="">Time</option></select>
           </div>
         </div>
-        <p class="cf-note-small">Times are in Korea Standard Time (KST). Our concierge will confirm the final slot.</p>
+        <p class="cf-note-small">All times in Korea Standard Time (KST). Clinic hours — Mon–Fri 10:30–19:30, Sat 10:00–16:00, closed Sundays. Our concierge will confirm the final slot.</p>
       </div>
 
       <!-- Concierge services -->
@@ -2696,6 +2708,64 @@
     }
   }
 
+  // ── Business hours time-slot generator ──
+  // Mon–Fri 10:30–19:30 · Sat 10:00–16:00 · Sun closed
+  // Last consultation slot ends 1h before closing
+  function generateTimeSlots(dayOfWeek) {
+    // dayOfWeek: 0 = Sun, 1 = Mon ... 6 = Sat
+    let startMin, endMin; // minutes from midnight
+    if (dayOfWeek === 0) {
+      return null; // Sunday — closed
+    } else if (dayOfWeek === 6) {
+      startMin = 10 * 60;       // 10:00
+      endMin = 15 * 60;         // last slot 15:00 (closes 16:00)
+    } else {
+      startMin = 10 * 60 + 30;  // 10:30
+      endMin = 18 * 60 + 30;    // last slot 18:30 (closes 19:30)
+    }
+    const slots = [];
+    for (let m = startMin; m <= endMin; m += 30) {
+      const h = Math.floor(m / 60);
+      const min = m % 60;
+      const label = `${String(h).padStart(2, '0')}:${String(min).padStart(2, '0')}`;
+      slots.push(label);
+    }
+    return slots;
+  }
+
+  function updateTimeOptions(slotNum) {
+    const dateInput = document.getElementById(`cf-date-${slotNum}`);
+    const timeSelect = document.getElementById(`cf-time-${slotNum}`);
+    if (!dateInput || !timeSelect) return;
+
+    const dateVal = dateInput.value;
+    timeSelect.innerHTML = '<option value="">Time</option>';
+
+    if (!dateVal) return;
+
+    const date = new Date(dateVal + 'T00:00:00');
+    const day = date.getDay();
+    const slots = generateTimeSlots(day);
+
+    if (slots === null) {
+      // Sunday selected — show closed notice
+      const opt = document.createElement('option');
+      opt.value = '';
+      opt.textContent = 'Closed on Sundays';
+      opt.disabled = true;
+      timeSelect.appendChild(opt);
+      timeSelect.classList.add('cf-time-closed');
+      return;
+    }
+    timeSelect.classList.remove('cf-time-closed');
+    slots.forEach(s => {
+      const opt = document.createElement('option');
+      opt.value = s;
+      opt.textContent = s;
+      timeSelect.appendChild(opt);
+    });
+  }
+
   // Chip selection (multi-select for treatments, single for history)
   document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('#cf-treatments .cf-chip').forEach(chip => {
@@ -2706,6 +2776,12 @@
         document.querySelectorAll('#cf-history .cf-chip').forEach(c => c.classList.remove('is-selected'));
         chip.classList.add('is-selected');
       });
+    });
+    // Set minimum date (today) on all date pickers so past dates can't be chosen
+    const today = new Date().toISOString().split('T')[0];
+    ['cf-arrival', 'cf-departure', 'cf-date-1', 'cf-date-2', 'cf-date-3'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.min = today;
     });
   });
 
@@ -2728,25 +2804,20 @@
     const departure = val('cf-departure');
     const flight = val('cf-flight');
 
-    const t1 = val('cf-time-1');
-    const t2 = val('cf-time-2');
-    const t3 = val('cf-time-3');
+    // Consultation slots: date + time pairs
+    const slots = [1, 2, 3].map(n => ({
+      date: val(`cf-date-${n}`),
+      time: val(`cf-time-${n}`)
+    })).filter(s => s.date && s.time);
 
     const airport = checked('cf-airport');
     const translation = checked('cf-translation');
 
-    // Format datetime nicely
-    const fmtDT = s => {
-      if (!s) return '';
-      const d = new Date(s);
-      if (isNaN(d)) return s;
-      return d.toLocaleString('en-GB', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
-    };
     const fmtD = s => {
       if (!s) return '';
-      const d = new Date(s);
+      const d = new Date(s + 'T00:00:00');
       if (isNaN(d)) return s;
-      return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+      return d.toLocaleDateString('en-GB', { weekday: 'short', day: '2-digit', month: 'short', year: 'numeric' });
     };
 
     // Build the message
@@ -2769,10 +2840,9 @@
       if (!arrival && !departure && !flight) msg += "Travel dates: (not specified)\n";
     }
 
-    const times = [t1, t2, t3].filter(Boolean);
-    if (times.length) {
+    if (slots.length) {
       msg += "\n— PREFERRED CONSULTATION TIMES (KST) —\n";
-      times.forEach((t, i) => { msg += `${i + 1}. ${fmtDT(t)}\n`; });
+      slots.forEach((s, i) => { msg += `${i + 1}. ${fmtD(s.date)} at ${s.time}\n`; });
     }
 
     if (airport || translation) {
